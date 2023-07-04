@@ -42,13 +42,13 @@
 
             <div style="margin-top: 50px;">
               <div class="formusername">
-                <input type="text" id="username" name="username" required>
-                <label class="form-label" for="form2Example18">Username</label>
+                <label for="username">Username</label>
+                <input class="form-control" type="text" id="username" name="username" placeholder="Input Username" required>
               </div>
 
               <div class="formpassword">
-                <input type="password" id="password" name="password" required>
-                <label class="form-label" for="form2Example28">Password</label>
+                <label for="inputpassword">Password</label>
+                <input class="form-control" type="password" id="password" name="password" placeholder="Input Password" required>
               </div>
             </div></br>
 

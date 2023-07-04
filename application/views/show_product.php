@@ -67,7 +67,7 @@
 
 <div class="content">
     <nav class="navbar navbar-dark bg-dark">
-      <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg" style="width: 60px; height: auto; margin-left: 50px;">
+      <img src="https://www.kfc.com.ph/Content/OnlineproductingImages/Shared/logo.svg" style="width: 60px; height: auto; margin-left: 50px;">
       <a class="navbar-brand" href="#"></a>
       <a class="text-white"><i class="fas fa-user"></i> <?php echo $user['role']; ?></a>
       <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -89,7 +89,7 @@
 
         <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier') : ?>
             <li class="nav-item">
-              <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i> Manage Order</a>
+              <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i class="fa fa-cart-plus"></i> Manage product</a>
               <a class="sidebar-link" href="<?php echo site_url('paymentprocessing'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
             </li>
         <?php endif; ?>
@@ -108,21 +108,27 @@
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th>Order_id</th>
+                    <th>Product_id</th>
                     <th>Image</th>
                     <th>Name</th>
+                    <th>Stock</th>
                     <th>Price</th>
-                    <th>Action<a href="<?php echo site_url('createuser'); ?>" class="btn btn-success" style="margin-left: 10px;">
-                        <i class="fas fa-plus"></i> Add</a></th>
+                    <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($orders as $order): ?>
+                <?php foreach ($products as $product): ?>
                     <tr>
-                        <td><?php echo $order['order_id']; ?></td>
-                        <td><?php echo $order['orderp']; ?></td>
-                        <td><?php echo $order['name']; ?></td>
-                        <td><?php echo $order['price']; ?></td>
+                        <td><?php echo $product['product_id']; ?></td>
+                        <td>
+                            <div>
+                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $product['img']; ?>" />
+                            </div>
+                        </td>
+
+                        <td><?php echo $product['name']; ?></td>
+                        <td><?php echo $product['stock']; ?></td>
+                        <td><?php echo $product['price']; ?></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Actions">
                                 <a href="<?php echo site_url('updateuser'); ?>" class="btn btn-primary" style="margin-left: 10px;">
@@ -135,11 +141,51 @@
             </tbody>
         </table>
         
-
+        <!-- Add Product Modal -->        
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add New Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="<?php echo site_url('product/add_prod'); ?>" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="img" class="block text-gray-700 font-bold mb-2">Image:</label>
+                        <input type="file" name="img" id="img" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
+                        <input type="text" name="name" id="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input type="text" class="form-control" id="stock" name="stock" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" class="form-control" id="price" name="price" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
 
         
 
     </div>
+
+    <!-- Modal Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 
     
 

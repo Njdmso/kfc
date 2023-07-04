@@ -95,7 +95,7 @@
             
             <?php if ($user['role'] === 'admin' || $user['role'] === 'manager') : ?>
                 <li class="nav-item">
-                    <a class="sidebar-link" href="<?php echo site_url('inventory'); ?>"><i class="fa fa-warehouse"></i> Manage Inventory</a>
+                    <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i class="fa fa-warehouse"></i> Manage Inventory</a>
                 </li>
             <?php endif; ?>
 

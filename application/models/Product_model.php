@@ -1,12 +1,16 @@
 <?php
-    class Order_model extends CI_model {
+    class Product_model extends CI_model {
 
-        public function get_order() {
+        public function get_product() {
             $this->db->select('*');
-            $this->db->from('tbl_order');
+            $this->db->from('tbl_product');
             $query=$this->db->get();
             return $query->result_array();
         }
+
+        public function create_product($data){
+            $this->db->insert('tbl_product', $data);
+        } 
 
         // public function create_order($name, $role, $username, $password) {
         //     $data = array(
