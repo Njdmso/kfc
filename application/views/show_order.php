@@ -36,28 +36,65 @@
         }
 
         .sidebar {
-        position: fixed;
-        top: 56px; /* Height of the top navbar */
-        left: 0;
-        height: 100%;
-        width: 200px;
-        background-color: #E4002B;
-        color: #fff;
-        padding-top: 20px;
-        padding-top: 50px;
+            position: fixed;
+            top: 56px; /* Height of the top navbar */
+            left: 0;
+            height: 100%;
+            width: 200px;
+            background-color: #E4002B;
+            color: #fff;
+            padding-top: 20px;
+            padding-top: 50px;
         }
 
         .sidebar-link {
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
+
+        .sidebar .nav-item a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
         }
 
         .content {
             flex-grow: 1;
             background-color: #f8f9fa;
             padding: 20px;
+        }
+
+        .nav-item:hover {
+            background-color: #343A40;
+        }
+
+        .sub-nav {
+            display: none;
+        }
+
+        .nav-item:hover .sub-nav{
+            display: block;
+        }
+
+        .sub-nav li a {
+            display: flex;
+            align-items: center;
+            color: #000;
+            transition: background-color 0.3s ease;
+            padding: 5px;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        .sub-nav a:hover {
+            background-color: black;
+        }
+
+        .sub-nav li a i {
+            margin-right: 10px;
         }
     </style>
 
@@ -75,7 +112,7 @@
 
     <div class="sidebar">
     <ul class="navbar-nav">
-    <?php if ($user['role'] === 'admin' || $user['role'] === 'employee') : ?>
+        <?php if ($user['role'] === 'admin' || $user['role'] === 'employee') : ?>
             <li class="nav-item">
               <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-chart-bar"></i> Dashboard</a>
             </li>
@@ -83,20 +120,38 @@
 
         <?php if ($user['role'] === 'admin') : ?>
           <li class="nav-item">
-            <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage Users</a>
+            <a class="sidebar-link" href="#"><i class="fas fa-users"></i> HR Management</a>
+            <ul class="sub-nav">
+              <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage Users</a>
+            </ul>
           </li>
         <?php endif; ?>
-
-        <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier') : ?>
+            
+        <?php if ($user['role'] === 'admin' || $user['role'] === 'manager') : ?>
             <li class="nav-item">
-              <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i> Manage Order</a>
-              <a class="sidebar-link" href="<?php echo site_url('paymentprocessing'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
+              <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i> Manage Inventory</a>
+              <ul class="sub-nav">
+                <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i class="fa fa-warehouse"></i> Stocks</a>
+              </ul>
             </li>
         <?php endif; ?>
-        
-        <?php if ($user['role'] === 'admin' || $user['manager'] === 'cashier') : ?>
+
+        <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant') : ?>
             <li class="nav-item">
-              <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i class="fa fa-warehouse"></i> Manage Inventory</a>
+              <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
+              <ul class="sub-nav">
+                <a class="sidebar-link" href="<?php echo site_url('paymentprocessing'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
+                <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i> Manage Order</a>
+              </ul>
+            </li>
+        <?php endif; ?>
+
+        <?php if ($user['role'] === 'admin') : ?>
+            <li class="nav-item">
+              <a class="sidebar-link" href="#"><i class="fa fa-chart-bar"></i> Report</a>
+              <ul class="sub-nav">
+                <a class="sidebar-link" href="<?php echo site_url('dataanalytics'); ?>"><i class="fa fa-chart-bar"></i> Data Analytics</a>
+              </ul>
             </li>
         <?php endif; ?>
     </ul>
