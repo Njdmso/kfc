@@ -161,6 +161,17 @@
 
 
 <div class="container">
+
+    <!-- Search Bar -->
+    <form action="<?php echo site_url('searchuser/search'); ?>" method="post" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search users" name="keyword">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </form>
+
     <table class="table">
         <thead class="thead-light">
             <tr>
@@ -183,7 +194,7 @@
                     <td>
                         <div class="btn-group" role="group" aria-label="Actions">
                             <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-user_id="<?php echo $user['user_id']; ?>" data-name="<?php echo $user['name']; ?>" data-role="<?php echo $user['role']; ?>" data-username="<?php echo $user['username']; ?>" data-password="<?php echo $user['password']; ?> "><i class="fas fa-edit"></i>Edit</button>
-                            <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                            <a href="<?php echo site_url('deleteuser/delete/' . $user['user_id']); ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</a>
                         </div>
                     </td>
                 </tr>

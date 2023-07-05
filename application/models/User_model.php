@@ -28,5 +28,20 @@
             $this->db->where('user_id', $user_id);
             $this->db->update('tbl_user', $data);
         }
+
+        public function delete_user($user_id)
+        {
+            $this->db->where('user_id', $user_id);
+            $this->db->delete('tbl_user');
+        }
+
+        public function search_user($keyword) {
+            // Perform a search for users based on the keyword
+            $this->db->like('name', $keyword);
+            $this->db->or_like('role', $keyword);
+            $this->db->or_like('username', $keyword);
+            $this->db->or_like('password', $keyword);
+            return $this->db->get('tbl_user')->result_array();
+        }
     }
 ?>

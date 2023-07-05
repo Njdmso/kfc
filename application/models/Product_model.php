@@ -10,27 +10,13 @@
 
         public function create_product($data){
             $this->db->insert('tbl_product', $data);
-        } 
+        }
 
-        // public function create_order($name, $role, $username, $password) {
-        //     $data = array(
-        //         'name' => $name,
-        //         'role' => $role,
-        //         'username' => $username,
-        //         'password' => $password
-        //     );
-        //     $this->db->insert('tbl_user', $data);
-        // }
-
-        // public function update_user($user_id, $name, $role, $username, $password) {
-        //     $data = array(
-        //         'name' => $name,
-        //         'role' => $role,
-        //         'username' => $username,
-        //         'password' => $password
-        //     );
-        //     $this->db->where('user_id', $user_id);
-        //     $this->db->update('tbl_user', $data);
-        // }
+        public function search_product($keyword) {
+            // Perform a search for users based on the keyword
+            $this->db->or_like('product_id', $keyword);
+            $this->db->or_like('name', $keyword);
+            return $this->db->get('tbl_product')->result_array();
+        }
     }
 ?>

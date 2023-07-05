@@ -10,7 +10,7 @@
             $user = $this->session->userData('user');
             if($user){
                 $data['user'] = $user;
-                $this->load->view('show_updateuser', $data);
+                $this->load->view('show_user', $data);
             }else{
                 redirect('login');
             }

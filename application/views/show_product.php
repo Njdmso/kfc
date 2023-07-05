@@ -160,6 +160,18 @@
 
 
     <div class="container">
+
+
+        <!-- Search Bar -->
+        <form action="<?php echo site_url('searchproduct/search'); ?>" method="post" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search users" name="keyword">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+        </form>
+                
         <table class="table">
             <thead class="thead-light">
                 <tr>
