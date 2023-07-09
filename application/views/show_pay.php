@@ -163,93 +163,83 @@
 
 
     <div class="container">
-
-
+        
         <!-- Search Bar -->
-        <form action="<?php echo site_url('searchproduct/search'); ?>" method="post" class="mb-3">
+        <form action="<?php echo site_url('pay/search'); ?>" method="post" class="mb-3">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Product" name="keyword">
+                <input type="text" class="form-control" placeholder="Search Pay" name="keyword">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
                 </div>
             </div>
         </form>
-                
+
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th>Product_id</th>
                     <th>Image</th>
                     <th>Name</th>
                     <th>Stock</th>
                     <th>Price</th>
+                    <th>Status</th>
                     <!-- <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th> -->
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($products as $product): ?>
+                <?php foreach ($pays as $pay): ?>
                     <tr>
-                        <td><?php echo $product['product_id']; ?></td>
                         <td>
                             <div>
-                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $product['img']; ?>" />
+                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $pay['img']; ?>" />
                             </div>
                         </td>
 
-                        <td><?php echo $product['name']; ?></td>
-                        <td><?php echo $product['stock']; ?></td>
-                        <td><?php echo $product['price']; ?></td>
-                        <!-- <td>
-                            <div class="btn-group" role="group" aria-label="Actions">
-                                <a href="<?php echo site_url('updateuser'); ?>" class="btn btn-primary" style="margin-left: 10px;">
-                                    <i class="fas fa-edit"></i> Edit</a>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                            </div>
-                        </td> -->
+                        <td><?php echo $pay['name']; ?></td>
+                        <td><?php echo $pay['stock']; ?></td>
+                        <td><?php echo $pay['price']; ?></td>
+                        <td><?php echo $pay['status']; ?></td>
+                        <td>
+                        <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-pay_id="<?php echo $pay['pay_id']; ?>"><i class="fas fa-edit"></i>Pay</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
-        <!-- Add Product Modal -->        
-        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+
+
+        <!-- Edit User Modal -->   
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add New Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="<?php echo site_url('product/add_prod'); ?>" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="img" class="block text-gray-700 font-bold mb-2">Image:</label>
-                        <input type="file" name="img" id="img" class="form-control">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Confirm Payment</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
-                        <input type="text" name="name" id="name" class="form-control">
+
+                    <div class="modal-body">
+                        <form method="POST" action="<?php echo site_url('pay/update'); ?>">
+                            <div class="form-group">
+                                <label for="pay_id">Pay ID</label>
+                                <input type="text" class="form-control" id="pay_id" name="pay_id" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <input type="text" class="form-control" id="status" name="status" value="Paid" readonly>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" name="update_pay">Update</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="stock">Stock</label>
-                        <input type="text" class="form-control" id="stock" name="stock" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                    </form>
-                </div>
                 </div>
             </div>
         </div>
 
-        
 
     </div>
 
@@ -265,5 +255,23 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $('.edit-button').click(function() {
+        var button = $(this);
+        var pay_id = button.data('pay_id');
+
+
+        console.log(pay_id);
+
+
+        $('#editModal #pay_id').val(pay_id);
+
+
+        $('#editModal').modal('show'); // Show the modal
+        });
+    });
+    </script>
 </body>
 </html>

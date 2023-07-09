@@ -166,9 +166,9 @@
 
 
         <!-- Search Bar -->
-        <form action="<?php echo site_url('searchproduct/search'); ?>" method="post" class="mb-3">
+        <form action="<?php echo site_url('purchase/search'); ?>" method="post" class="mb-3">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Product" name="keyword">
+                <input type="text" class="form-control" placeholder="Search Purchase" name="keyword">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
                 </div>
@@ -181,48 +181,89 @@
                     <th>Product_id</th>
                     <th>Image</th>
                     <th>Name</th>
-                    <th>Stock</th>
                     <th>Price</th>
-                    <!-- <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th> -->
+                    <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($products as $product): ?>
+                <?php foreach ($purchases as $purchase): ?>
                     <tr>
-                        <td><?php echo $product['product_id']; ?></td>
+                        <td><?php echo $purchase['purchase_id']; ?></td>
                         <td>
                             <div>
-                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $product['img']; ?>" />
+                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $purchase['img']; ?>" />
                             </div>
                         </td>
 
-                        <td><?php echo $product['name']; ?></td>
-                        <td><?php echo $product['stock']; ?></td>
-                        <td><?php echo $product['price']; ?></td>
-                        <!-- <td>
+                        <td><?php echo $purchase['name']; ?></td>
+                        <td><?php echo $purchase['price']; ?></td>
+                        <td>
                             <div class="btn-group" role="group" aria-label="Actions">
-                                <a href="<?php echo site_url('updateuser'); ?>" class="btn btn-primary" style="margin-left: 10px;">
-                                    <i class="fas fa-edit"></i> Edit</a>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                                <button type="button" class="btn btn-primary edit-button" 
+                                data-toggle="modal" data-target="#editModal" data-purchase_id="<?php echo $purchase['purchase_id']; ?>" 
+                                data-img="<?php echo $purchase['img']; ?>" data-name="<?php echo $purchase['name']; ?>" 
+                                data-price="<?php echo $purchase['price']; ?>"><i class="fas fa-edit"></i>Buy</button>
                             </div>
-                        </td> -->
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
+
+        <!-- Buy Purchase Modal -->   
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Buy Purchase</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="buyForm" method="POST" action="<?php echo site_url('purchase/add_prod'); ?>" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="purchase_id">Purchase ID</label>
+                                <input type="text" class="form-control" id="purchase_id" name="purchase_id" readonly>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="img" name="img">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="stock">Stock</label>
+                                <input type="text" class="form-control" id="stock" name="stock">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="text" class="form-control" id="price" name="price" readonly>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Buy</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Add Product Modal -->        
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add New Product</h5>
+                    <h5 class="modal-title" id="addModalLabel">Add New Purchase</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo site_url('product/add_prod'); ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?php echo site_url('purchase/add_purchase'); ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="img" class="block text-gray-700 font-bold mb-2">Image:</label>
                         <input type="file" name="img" id="img" class="form-control">
@@ -230,10 +271,6 @@
                     <div class="form-group">
                         <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
                         <input type="text" name="name" id="name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="stock">Stock</label>
-                        <input type="text" class="form-control" id="stock" name="stock" required>
                     </div>
                     <div class="form-group">
                         <label for="price">Price</label>
@@ -253,17 +290,32 @@
 
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <!-- Modal Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 
-    
 
-    <!-- Bootstrap JS (optional, if you need any JavaScript functionality) -->
+  <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+    // JavaScript code to handle the click event on the "Buy" button
+    $(document).on('click', '.edit-button', function () {
+        var purchase_id = $(this).data('purchase_id');
+        var img = $(this).data('img');
+        var name = $(this).data('name');
+        var price = $(this).data('price');
+
+        // Set the values in the modal
+        $('#purchase_id').val(purchase_id);
+        $('#img').val(img); // Set the img data in the hidden input field
+        $('#name').val(name);
+        $('#price').val(price);
+    });
+    </script>
 </body>
 </html>

@@ -142,9 +142,8 @@
                 <li class="nav-item">
                 <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
                 <ul class="sub-nav">
-                <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
-                <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i> Manage Order</a>
-                <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i class="fa fa-cart-plus"></i> Manage Payroll</a>
+                    <a class="sidebar-link" href="<?php echo site_url('paymentprocessing'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
+                    <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i> Manage Order</a>
                 </ul>
                 </li>
             <?php endif; ?>
@@ -164,90 +163,46 @@
 
     <div class="container">
 
-
         <!-- Search Bar -->
-        <form action="<?php echo site_url('searchproduct/search'); ?>" method="post" class="mb-3">
+        <form action="<?php echo site_url('buy/search'); ?>" method="post" class="mb-3">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Product" name="keyword">
+                <input type="text" class="form-control" placeholder="Search Buy" name="keyword">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
                 </div>
             </div>
         </form>
-                
+        
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th>Product_id</th>
-                    <th>Image</th>
+                    <th>Buy ID</th>
+                    <th>img</th>
                     <th>Name</th>
                     <th>Stock</th>
                     <th>Price</th>
-                    <!-- <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th> -->
+                    <th>Buy Date</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($products as $product): ?>
+                <?php foreach ($buys as $buy): ?>
                     <tr>
-                        <td><?php echo $product['product_id']; ?></td>
+                        <td><?php echo $buy['buy_id']; ?></td>
                         <td>
                             <div>
-                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $product['img']; ?>" />
+                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $buy['img']; ?>" />
                             </div>
                         </td>
 
-                        <td><?php echo $product['name']; ?></td>
-                        <td><?php echo $product['stock']; ?></td>
-                        <td><?php echo $product['price']; ?></td>
-                        <!-- <td>
-                            <div class="btn-group" role="group" aria-label="Actions">
-                                <a href="<?php echo site_url('updateuser'); ?>" class="btn btn-primary" style="margin-left: 10px;">
-                                    <i class="fas fa-edit"></i> Edit</a>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                            </div>
-                        </td> -->
+                        <td><?php echo $buy['name']; ?></td>
+                        <td><?php echo $buy['stock']; ?></td>
+                        <td><?php echo $buy['price']; ?></td>
+                        <td><?php echo $buy['datebuy']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
-        <!-- Add Product Modal -->        
-        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add New Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="<?php echo site_url('product/add_prod'); ?>" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="img" class="block text-gray-700 font-bold mb-2">Image:</label>
-                        <input type="file" name="img" id="img" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
-                        <input type="text" name="name" id="name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="stock">Stock</label>
-                        <input type="text" class="form-control" id="stock" name="stock" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-        </div>
+
 
         
 
