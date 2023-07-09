@@ -138,6 +138,12 @@
                 </li>
             <?php endif; ?>
 
+            <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier') : ?>
+            <li class="nav-item">
+              <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-dollar-sign"></i> Sales</a>
+            </li>
+            <?php endif; ?>
+
             <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant') : ?>
                 <li class="nav-item">
                 <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
@@ -186,7 +192,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($pays as $pay): ?>
+                <?php   $totalPrice = 0; foreach ($pays as $pay): ?>
                     <tr>
                         <td>
                             <div>
@@ -201,9 +207,28 @@
                         <td>
                         <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-pay_id="<?php echo $pay['pay_id']; ?>"><i class="fas fa-edit"></i>Pay</button>
                         </td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+            <!-- Table footer code -->
+            <tfoot class="tfoot-light">
+                <tr>
+                    <td colspan="2"></td>
+                    <td><strong>Total Pay:</strong></td>
+                    <td>
+                        <?php
+                        $totalPrice = 0; // Variable to hold the total price
+                        foreach ($pays as $pay) {
+                            $totalPrice += $pay['price'] * $pay['stock']; // Add the price to the total
+                        }
+                        echo $totalPrice; // Output the total price
+                        ?>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
 
 

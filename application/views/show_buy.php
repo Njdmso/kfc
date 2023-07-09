@@ -138,6 +138,12 @@
                 </li>
             <?php endif; ?>
 
+            <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier') : ?>
+                <li class="nav-item">
+                    <a class="sidebar-link" href="<?php echo site_url('sales'); ?>"><i class="fas fa-dollar-sign"></i> Sales</a>
+                </li>
+             <?php endif; ?>
+
             <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant') : ?>
                 <li class="nav-item">
                 <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
