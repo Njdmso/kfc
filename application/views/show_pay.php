@@ -140,7 +140,7 @@
 
             <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier') : ?>
             <li class="nav-item">
-              <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-dollar-sign"></i> Sales</a>
+              <a class="sidebar-link" href="<?php echo site_url('sale'); ?>"><i class="fas fa-dollar-sign"></i> Sales</a>
             </li>
             <?php endif; ?>
 
