@@ -7,5 +7,18 @@
             $query=$this->db->get();
             return $query->result_array();
         }
+
+        public function create_order($order_id, $name, $stock, $price, $orderdate, $customer, $cashier) {
+            $data = array(
+                'order_id' => $order_id,
+                'name' => $name,
+                'stock' => $stock,
+                'price' => $price,
+                'orderdate' => $orderdate,
+                'customer' => $customer,
+                'cashier' => $cashier,
+            );
+            $this->db->insert('tbl_order', $data);
+        }
     }
 ?>

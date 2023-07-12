@@ -212,8 +212,9 @@
         </div>
         
         <div class="col-md-6">
-            <form action="">
-                <input type="text" class="form-control" placeholder="Customer Name" required>
+            <form action="<?php echo site_url('sale/add'); ?>" method="POST">
+                <input type="text" for="customer" id="customer" name="customer" class="form-control" placeholder="Customer Name" required>
+                <input type="hidden" id="cashier" name="cashier" value="<?php echo $user['name'] ?>">
                 <h1>Orders List</h1>
                 <div class="orders">
                     <table class="table table-bordered table-striped receipt-table">
@@ -221,9 +222,9 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>img</th>
-                                <th>Quantity</th>
                                 <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Totalprice</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -237,7 +238,8 @@
                     <div class="total-value" id="total-value">0.00</div>
                 </div>
                 <div class="list-footer">
-                    <button class="btn btn-primary" id="pay-button" type="button">Pay</button>
+                    <input type="hidden" id="order-data" name="order_data">
+                    <button class="btn btn-primary" action="" id="pay-button" type="submit">Pay</button>
                 </div>
           </form>
         </div>
@@ -292,9 +294,9 @@
         // Handle pay button click
         $('#pay-button').click(function() {
             // Pass the orders data to the other form or perform any desired action
-            console.log(orders);
-            // Here you can redirect to the other form or show it using JavaScript/jQuery
+            $('#order-data').val(JSON.stringify(orders)); // Convert orders array to JSON string and set as hidden input value
         });
+
 
         // Function to update the orders list
         function updateOrders() {
