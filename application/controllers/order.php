@@ -18,5 +18,18 @@
                 redirect('login');
             }
         }
+
+        public function search() {
+            $keyword = $this->input->post('keyword');
+        
+            // Perform the search
+            $data['orders'] = $this->Order_model->search_order($keyword);
+    
+            $user = $this->session->userData('user');
+            $data['user'] = $user; // Add this line to pass the $user variable to the view
+        
+            // Load the user list view with the search results
+            $this->load->view('show_order', $data);
+        }
     }
 ?>

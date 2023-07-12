@@ -8,25 +8,15 @@
             return $query->result_array();
         }
 
-        // public function create_order($name, $role, $username, $password) {
-        //     $data = array(
-        //         'name' => $name,
-        //         'role' => $role,
-        //         'username' => $username,
-        //         'password' => $password
-        //     );
-        //     $this->db->insert('tbl_user', $data);
-        // }
-
-        // public function update_user($user_id, $name, $role, $username, $password) {
-        //     $data = array(
-        //         'name' => $name,
-        //         'role' => $role,
-        //         'username' => $username,
-        //         'password' => $password
-        //     );
-        //     $this->db->where('user_id', $user_id);
-        //     $this->db->update('tbl_user', $data);
-        // }
+        public function search_order($keyword) {
+            // Perform a search for users based on the keyword
+            $this->db->or_like('order_id', $keyword);
+            $this->db->or_like('name', $keyword);
+            $this->db->or_like('price', $keyword);
+            $this->db->or_like('cashier', $keyword);
+            $this->db->or_like('customer', $keyword);
+            $this->db->or_like('orderdate', $keyword);
+            return $this->db->get('tbl_order')->result_array();
+        }
     }
 ?>

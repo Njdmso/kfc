@@ -20,5 +20,13 @@
             );
             $this->db->insert('tbl_order', $data);
         }
+
+        public function search_sale($keyword) {
+            // Perform a search for users based on the keyword
+            $this->db->or_like('sale_id', $keyword);
+            $this->db->or_like('name', $keyword);
+            $this->db->or_like('price', $keyword);
+            return $this->db->get('tbl_sale')->result_array();
+        }
     }
 ?>

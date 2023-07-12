@@ -48,7 +48,20 @@
             }
           
             redirect('sale');
-          }
+        }
+
+        public function search() {
+            $keyword = $this->input->post('keyword');
+        
+            // Perform the search
+            $data['sales'] = $this->Sale_model->search_sale($keyword);
+    
+            $user = $this->session->userData('user');
+            $data['user'] = $user; // Add this line to pass the $user variable to the view
+        
+            // Load the user list view with the search results
+            $this->load->view('show_sale', $data);
+        }
           
     }
 ?>

@@ -103,6 +103,7 @@
 
 
 <div class="content">
+
     <nav class="navbar navbar-dark bg-dark">
       <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg" style="width: 60px; height: auto; margin-left: 50px;">
       <a class="navbar-brand" href="#"></a>
@@ -119,12 +120,9 @@
         <?php endif; ?>
 
         <?php if ($user['role'] === 'admin') : ?>
-          <li class="nav-item">
-            <a class="sidebar-link" href="#"><i class="fas fa-users"></i> HR Management</a>
-            <ul class="sub-nav">
-              <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage Users</a>
-            </ul>
-          </li>
+            <li class="nav-item">
+                <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage Users</a>
+            </li>
         <?php endif; ?>
             
         <?php if ($user['role'] === 'admin' || $user['role'] === 'manager') : ?>
@@ -132,7 +130,6 @@
               <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i> Manage Inventory</a>
               <ul class="sub-nav">
               <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i class="fa fa-warehouse"></i> Invetory</a>
-                <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i> buy</a>
                 <a class="sidebar-link" href="<?php echo site_url('purchase'); ?>"><i class="fa fa-warehouse"></i> Purchase</a>
               </ul>
             </li>
@@ -148,9 +145,9 @@
             <li class="nav-item">
               <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
               <ul class="sub-nav">
-              <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
+                <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
+                <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i> Buys</a>
                 <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i> Manage Order</a>
-                <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i class="fa fa-cart-plus"></i> Manage Payroll</a>
               </ul>
             </li>
         <?php endif; ?>
@@ -166,34 +163,40 @@
     </ul>
     </div>
 </div>
-
-
     <div class="container">
+
+        <!-- Search Bar -->
+        <form action="<?php echo site_url('order/search'); ?>" method="post" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Orders" name="keyword">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+        </form>
+
         <table class="table">
             <thead class="thead-light">
                 <tr>
                     <th>Order_id</th>
-                    <th>Image</th>
                     <th>Name</th>
+                    <th>Stock</th>
                     <th>Price</th>
-                    <th>Action<a href="<?php echo site_url('createuser'); ?>" class="btn btn-success" style="margin-left: 10px;">
-                        <i class="fas fa-plus"></i> Add</a></th>
+                    <th>Orderdate</th>
+                    <th>Customer</th>
+                    <th>Cashier</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($orders as $order): ?>
                     <tr>
                         <td><?php echo $order['order_id']; ?></td>
-                        <td><?php echo $order['orderp']; ?></td>
                         <td><?php echo $order['name']; ?></td>
+                        <td><?php echo $order['stock']; ?></td>
                         <td><?php echo $order['price']; ?></td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Actions">
-                                <a href="<?php echo site_url('updateuser'); ?>" class="btn btn-primary" style="margin-left: 10px;">
-                                    <i class="fas fa-edit"></i> Edit</a>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                            </div>
-                        </td>
+                        <td><?php echo $order['orderdate']; ?></td>
+                        <td><?php echo $order['customer']; ?></td>
+                        <td><?php echo $order['cashier']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
