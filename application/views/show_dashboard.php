@@ -162,6 +162,12 @@
               </ul>
             </li>
         <?php endif; ?>
+
+        <?php if ($user['role'] === 'admin') : ?>
+            <li class="nav-item">
+              <a class="sidebar-link" href= "http://192.168.10.128/RBBI/index.php/login/bank?url=<?php echo site_url('dashboard'); ?>" ><i class="fa fa-chart-bar"></i> Bank Account</a>
+            </li>
+        <?php endif; ?>
         
       </ul>
     </div>

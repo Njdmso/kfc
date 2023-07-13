@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <style>
         body {
             display: flex;
@@ -200,8 +201,15 @@
                         <td><?php echo $pay['stock']; ?></td>
                         <td><?php echo $pay['price']; ?></td>
                         <td><?php echo $pay['status']; ?></td>
+                        <?php
+                            $totalPrice = 0; // Variable to hold the total price
+                            foreach ($pays as $pay) {
+                                $totalPrice += $pay['price'] * $pay['stock']; // Add the price to the total
+                            }
+                        ?>
                         <td>
-                        <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-pay_id="<?php echo $pay['pay_id']; ?>"><i class="fas fa-edit"></i>Pay</button>
+                            <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-pay_id="<?php echo $pay['pay_id']; ?>"><i class="fas fa-edit"></i>Pay</button>
+                            <a type="button" class="btn btn-primary" href='http://192.168.10.128/RBBI/index.php/access/index/56/<?php echo $totalPrice?>?url=http://[::1]/kfc/index.php/pay/&data=<?php echo $pay['pay_id']?>'><i class="fas fa-edit"></i>Pay with RBB</a>
                         </td>
 
                     </tr>
@@ -214,10 +222,7 @@
                     <td><strong>Total Pay:</strong></td>
                     <td>
                         <?php
-                        $totalPrice = 0; // Variable to hold the total price
-                        foreach ($pays as $pay) {
-                            $totalPrice += $pay['price'] * $pay['stock']; // Add the price to the total
-                        }
+                        
                         echo $totalPrice; // Output the total price
                         ?>
                     </td>
@@ -273,25 +278,24 @@
     <!-- Bootstrap JS (optional, if you need any JavaScript functionality) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script>
     $(document).ready(function() {
         $('.edit-button').click(function() {
-        var button = $(this);
-        var pay_id = button.data('pay_id');
+            var button = $(this);
+            var pay_id = button.data('pay_id');
 
-
-        console.log(pay_id);
-
-
-        $('#editModal #pay_id').val(pay_id);
-
-
-        $('#editModal').modal('show'); // Show the modal
+            $('#editModal #pay_id').val(pay_id);
+            $('#editModal').modal('show'); // Show the modal
         });
+        
+        var result = <?php echo json_encode($_GET);?>;
+        console.log(result);
+        if(result.success){
+            $.post('<?php echo site_url('pay/update'); ?>',{pay_id:result.data, status:'Paid'});
+        }
     });
     </script>
 </body>
