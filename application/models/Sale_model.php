@@ -8,7 +8,7 @@
             return $query->result_array();
         }
 
-        public function create_order($order_id, $name, $stock, $price, $orderdate, $customer, $cashier) {
+        public function create_order($order_id, $name, $stock, $price, $orderdate, $customer, $cashier, $totalprice) {
             $data = array(
                 'order_id' => $order_id,
                 'name' => $name,
@@ -17,6 +17,7 @@
                 'orderdate' => $orderdate,
                 'customer' => $customer,
                 'cashier' => $cashier,
+                'totalprice' => $totalprice,
             );
             $this->db->insert('tbl_order', $data);
         }

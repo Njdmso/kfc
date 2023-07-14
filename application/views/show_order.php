@@ -185,6 +185,7 @@
                     <th>Orderdate</th>
                     <th>Customer</th>
                     <th>Cashier</th>
+                    <th>Totalprice</th>
                 </tr>
             </thead>
             <tbody>
@@ -197,15 +198,30 @@
                         <td><?php echo $order['orderdate']; ?></td>
                         <td><?php echo $order['customer']; ?></td>
                         <td><?php echo $order['cashier']; ?></td>
+                        <td><?php echo $order['totalprice']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+             <!-- Table footer code -->
+             <tfoot class="tfoot-light">
+                <tr>
+                    <td colspan="2"></td>
+                    <td><strong>Total Sale:</strong></td>
+                    <td>
+                        <?php
+                        $total = 0; // Variable to hold the total price
+                        foreach ($orders as $order) {
+                            $total += $order['totalprice']; // Add the price to the total
+                        }
+                        
+                        echo $total; // Output the total
+                        ?>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
-        
-
-
-        
-
     </div>
 
     

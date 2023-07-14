@@ -34,6 +34,7 @@
                 'orderdate' => $dateorder,
                 'customer' => $this->input->post('customer'),
                 'cashier' => $this->input->post('cashier'),
+                'totalprice' => $order['totalPrice'],
               );
           
               $this->Sale_model->create_order(
@@ -43,7 +44,8 @@
                 $data['price'],
                 $data['orderdate'],
                 $data['customer'],
-                $data['cashier']
+                $data['cashier'],
+                $data['totalprice']
               );
             }
           
