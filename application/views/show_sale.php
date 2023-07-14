@@ -290,10 +290,7 @@
                 orders = JSON.parse(window.atob(result.data));
                 $('#order-data').val(JSON.stringify(orders));
                 document.getElementById('sale_add').submit();
-            }
-            else{
-                redirect('sale');
-            }
+            };
 
 
             // Handle add to order button click
