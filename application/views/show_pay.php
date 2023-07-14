@@ -292,7 +292,6 @@
         });
         
         var result = <?php echo json_encode($_GET);?>;
-        console.log(result);
         if(result.success){
             $.post('<?php echo site_url('pay/update'); ?>',{pay_id:result.data, status:'Paid'});
         }

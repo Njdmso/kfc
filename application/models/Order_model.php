@@ -14,7 +14,6 @@
             $this->db->or_like('name', $keyword);
             $this->db->or_like('price', $keyword);
             $this->db->or_like('cashier', $keyword);
-            $this->db->or_like('customer', $keyword);
             $this->db->or_like('orderdate', $keyword);
             return $this->db->get('tbl_order')->result_array();
         }

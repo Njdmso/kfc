@@ -8,14 +8,13 @@
             return $query->result_array();
         }
 
-        public function create_order($order_id, $name, $stock, $price, $orderdate, $customer, $cashier, $totalprice) {
+        public function create_order($order_id, $name, $stock, $price, $orderdate, $cashier, $totalprice) {
             $data = array(
                 'order_id' => $order_id,
                 'name' => $name,
                 'stock' => $stock,
                 'price' => $price,
                 'orderdate' => $orderdate,
-                'customer' => $customer,
                 'cashier' => $cashier,
                 'totalprice' => $totalprice,
             );

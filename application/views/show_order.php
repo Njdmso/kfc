@@ -183,7 +183,6 @@
                     <th>Stock</th>
                     <th>Price</th>
                     <th>Orderdate</th>
-                    <th>Customer</th>
                     <th>Cashier</th>
                     <th>Totalprice</th>
                 </tr>
@@ -196,7 +195,6 @@
                         <td><?php echo $order['stock']; ?></td>
                         <td><?php echo $order['price']; ?></td>
                         <td><?php echo $order['orderdate']; ?></td>
-                        <td><?php echo $order['customer']; ?></td>
                         <td><?php echo $order['cashier']; ?></td>
                         <td><?php echo $order['totalprice']; ?></td>
                     </tr>

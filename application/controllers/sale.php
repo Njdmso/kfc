@@ -24,7 +24,7 @@
             $dateorder = date('Y-m-d');
             $orderData = $this->input->post('order_data');
             $orders = json_decode($orderData, true); // Convert JSON string to array
-          
+            
             foreach ($orders as $order) {
               $data = array(
                 'order_id' => $order['productId'],
@@ -32,7 +32,6 @@
                 'stock' => $order['quantity'],
                 'price' => $order['productPrice'],
                 'orderdate' => $dateorder,
-                'customer' => $this->input->post('customer'),
                 'cashier' => $this->input->post('cashier'),
                 'totalprice' => $order['totalPrice'],
               );
@@ -43,12 +42,10 @@
                 $data['stock'],
                 $data['price'],
                 $data['orderdate'],
-                $data['customer'],
                 $data['cashier'],
                 $data['totalprice']
               );
             }
-          
             redirect('sale');
         }
 

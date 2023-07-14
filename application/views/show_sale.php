@@ -236,9 +236,9 @@
             </div>
 
             <div class="col-md-6">
-                <form action="<?php echo site_url('sale/add'); ?>" method="POST">
-                    <input type="text" for="customer" id="customer" name="customer" class="form-control"
-                        placeholder="Customer Name" required>
+                <form id='sale_add' action="<?php echo site_url('sale/add'); ?>" method="POST">
+                    <!-- <input type="text" for="customer" id="customer" name="customer" class="form-control"
+                        placeholder="Customer Name"> -->
                     <input type="hidden" id="cashier" name="cashier" value="<?php echo $user['name'] ?>">
                     <h1>Orders List</h1>
                     <div class="orders">
@@ -282,6 +282,20 @@
             var originalTable = $('#product-table tbody').html(); // Store the original table HTML
             var orders = []; // Array to store the orders
 
+
+            var result = <?php echo json_encode($_GET);?>;
+            
+            if(result.success){
+                
+                orders = JSON.parse(window.atob(result.data));
+                $('#order-data').val(JSON.stringify(orders));
+                document.getElementById('sale_add').submit();
+            }
+            else{
+                redirect('sale');
+            }
+
+
             // Handle add to order button click
             $(document).on('click', '.add-to-order', function () {
                 var productId = $(this).data('product-id');
@@ -298,6 +312,7 @@
                 };
                 orders.push(order); // Add the order to the orders array
                 updateOrders(); // Update the orders list
+               
             });
 
             // Handle order quantity change
@@ -323,17 +338,16 @@
                 // Pass the orders data to the other form or perform any desired action
                 $('#order-data').val(JSON.stringify(orders)); // Convert orders array to JSON string and set as hidden input value
             });
+            
             //Handle pay with rbbi click
             $('#pay-rbbi-button').click(function () {
 
                 // Trigger the click event of the pay button
-                $('#pay-button').trigger('click');
-
                 // Get the total value
                 var totalAmount = parseFloat($('#total-value').text());
 
                 // Construct the RBBI payment URL with the total amount
-                var rbbiUrl = 'http://192.168.10.128/RBBI/index.php/access/index/55/' + totalAmount + '?url=http://[::1]/kfc/index.php/sale/&data=';
+                var rbbiUrl = 'http://192.168.10.128/RBBI/index.php/access/index/55/' + totalAmount + '?url=http://[::1]/kfc/index.php/sale/&data='+window.btoa(JSON.stringify(orders));
 
                 // Redirect to the RBBI payment URL
                 window.location.href = rbbiUrl;
