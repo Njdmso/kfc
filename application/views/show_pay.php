@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,8 @@
             display: flex;
             min-height: 100vh;
         }
-        .container{
+
+        .container {
             margin-top: 80px;
         }
 
@@ -38,7 +40,8 @@
 
         .sidebar {
             position: fixed;
-            top: 56px; /* Height of the top navbar */
+            top: 56px;
+            /* Height of the top navbar */
             left: 0;
             height: 100%;
             width: 200px;
@@ -49,10 +52,10 @@
         }
 
         .sidebar-link {
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
         }
 
         .content {
@@ -76,7 +79,7 @@
             display: none;
         }
 
-        .nav-item:hover .sub-nav{
+        .nav-item:hover .sub-nav {
             display: block;
         }
 
@@ -89,7 +92,7 @@
             font-size: 14px;
             text-decoration: none;
         }
-        
+
         .sub-nav a:hover {
             background-color: black;
         }
@@ -100,73 +103,111 @@
     </style>
 
 </head>
+
 <body>
 
 
-<div class="content">
-    <nav class="navbar navbar-dark bg-dark">
-    <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg" style="width: 60px; height: auto; margin-left: 50px;">
-      <a class="navbar-brand" href="#"></a>
-      <a class="text-white"><i class="fas fa-user"></i> <?php echo $user['role']; ?></a>
-      <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
-    </nav>
+    <div class="content">
+        <nav class="navbar navbar-dark bg-dark">
+            <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg"
+                style="width: 60px; height: auto; margin-left: 50px;">
+            <a class="navbar-brand" href="#"></a>
+            <a class="text-white"><i class="fas fa-user"></i>
+                <?php echo $user['role']; ?>
+            </a>
+            <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
+        </nav>
 
-    <div class="sidebar">
-        <ul class="navbar-nav">
-            <?php if ($user['role'] === 'admin' || $user['role'] === 'employee') : ?>
+        <div class="sidebar">
+            <ul class="navbar-nav">
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-chart-bar"></i>
+                            Dashboard</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage
+                            Users</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'hr'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i>HRM</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('employee'); ?>"><i
+                                    class="fa fa-warehouse"></i> Employees</a>
+                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i
+                                    class="fa fa-cart-plus"></i> Payroll</a>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'manager'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i> Manage Inventory</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i
+                                    class="fa fa-warehouse"></i> Invetory</a>
+                            <a class="sidebar-link" href="<?php echo site_url('purchase'); ?>"><i
+                                    class="fa fa-warehouse"></i> Purchase</a>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('sale'); ?>"><i class="fas fa-dollar-sign"></i>
+                            Sales</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i>
+                                Payment Proccessing</a>
+                            <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i>
+                                Buys</a>
+                            <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i>
+                                Orders</a>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fa fa-chart-bar"></i> Report</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('analytics'); ?>"><i
+                                    class="fa fa-chart-bar"></i> Data Analytics</a>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link"
+                            href="http://192.168.10.128/RBBI/index.php/login/bank?url=<?php echo site_url('dashboard'); ?>"><i
+                                class="fa fa-chart-bar"></i> Bank Account</a>
+                    </li>
+                <?php endif; ?>
+
                 <li class="nav-item">
-                <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-chart-bar"></i> Dashboard</a>
+                    <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
                 </li>
-            <?php endif; ?>
-
-            <?php if ($user['role'] === 'admin') : ?>
-            <li class="nav-item">
-                <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage Users</a>
-            </li>
-            <?php endif; ?>
-                
-            <?php if ($user['role'] === 'admin' || $user['role'] === 'manager') : ?>
-                <li class="nav-item">
-                <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i> Manage Inventory</a>
-                <ul class="sub-nav">
-                <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i class="fa fa-warehouse"></i> Invetory</a>
-                <a class="sidebar-link" href="<?php echo site_url('purchase'); ?>"><i class="fa fa-warehouse"></i> Purchase</a>
-                </ul>
-                </li>
-            <?php endif; ?>
-
-            <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier') : ?>
-            <li class="nav-item">
-              <a class="sidebar-link" href="<?php echo site_url('sale'); ?>"><i class="fas fa-dollar-sign"></i> Sales</a>
-            </li>
-            <?php endif; ?>
-
-            <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant') : ?>
-                <li class="nav-item">
-                <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
-                <ul class="sub-nav">
-                    <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
-                    <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i> Buys</a>
-                    <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i> Orders</a>
-                </ul>
-                </li>
-            <?php endif; ?>
-
-            <?php if ($user['role'] === 'admin') : ?>
-                <li class="nav-item">
-                <a class="sidebar-link" href="#"><i class="fa fa-chart-bar"></i> Report</a>
-                <ul class="sub-nav">
-                    <a class="sidebar-link" href="<?php echo site_url('dataanalytics'); ?>"><i class="fa fa-chart-bar"></i> Data Analytics</a>
-                </ul>
-                </li>
-            <?php endif; ?>
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
 
 
     <div class="container">
-        
+
         <!-- Search Bar -->
         <form action="<?php echo site_url('pay/search'); ?>" method="post" class="mb-3">
             <div class="input-group">
@@ -189,27 +230,41 @@
                 </tr>
             </thead>
             <tbody>
-                <?php   $totalPrice = 0; foreach ($pays as $pay): ?>
+                <?php $totalPrice = 0;
+                foreach ($pays as $pay): ?>
                     <tr>
                         <td>
                             <div>
-                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $pay['img']; ?>" />
+                                <img style='width: 50px; height: auto;'
+                                    src="<?php echo UPLOADS_BASE_URL . $pay['img']; ?>" />
                             </div>
                         </td>
 
-                        <td><?php echo $pay['name']; ?></td>
-                        <td><?php echo $pay['stock']; ?></td>
-                        <td><?php echo $pay['price']; ?></td>
-                        <td><?php echo $pay['status']; ?></td>
+                        <td>
+                            <?php echo $pay['name']; ?>
+                        </td>
+                        <td>
+                            <?php echo $pay['stock']; ?>
+                        </td>
+                        <td>
+                            <?php echo $pay['price']; ?>
+                        </td>
+                        <td>
+                            <?php echo $pay['status']; ?>
+                        </td>
                         <?php
-                            $totalPrice = 0; // Variable to hold the total price
-                            foreach ($pays as $pay) {
-                                $totalPrice += $pay['price'] * $pay['stock']; // Add the price to the total
-                            }
+                        $totalPrice = 0; // Variable to hold the total price
+                        foreach ($pays as $pay) {
+                            $totalPrice += $pay['price'] * $pay['stock']; // Add the price to the total
+                        }
                         ?>
                         <td>
-                            <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-pay_id="<?php echo $pay['pay_id']; ?>"><i class="fas fa-edit"></i>Pay</button>
-                            <a type="button" class="btn btn-primary" href='http://192.168.10.128/RBBI/index.php/access/index/56/<?php echo $totalPrice?>?url=http://[::1]/kfc/index.php/pay/&data=<?php echo $pay['pay_id']?>'><i class="fas fa-edit"></i>Pay with RBB</a>
+                            <button type="button" class="btn btn-primary edit-button" data-toggle="modal"
+                                data-target="#editModal" data-pay_id="<?php echo $pay['pay_id']; ?>"><i
+                                    class="fas fa-edit"></i>Pay</button>
+                            <a type="button" class="btn btn-primary"
+                                href='http://192.168.10.128/RBBI/index.php/access/index/56/<?php echo $totalPrice ?>?url=http://[::1]/kfc/index.php/pay/&data=<?php echo $pay['pay_id'] ?>'><i
+                                    class="fas fa-edit"></i>Pay with RBBI</a>
                         </td>
 
                     </tr>
@@ -222,7 +277,7 @@
                     <td><strong>Total Pay:</strong></td>
                     <td>
                         <?php
-                        
+
                         echo $totalPrice; // Output the total price
                         ?>
                     </td>
@@ -233,14 +288,15 @@
         </table>
 
 
-        <!-- Edit User Modal -->   
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <!-- Edit User Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">Confirm Payment</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
@@ -273,7 +329,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 
-    
+
 
     <!-- Bootstrap JS (optional, if you need any JavaScript functionality) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -282,20 +338,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script>
-    $(document).ready(function() {
-        $('.edit-button').click(function() {
-            var button = $(this);
-            var pay_id = button.data('pay_id');
+        $(document).ready(function () {
+            $('.edit-button').click(function () {
+                var button = $(this);
+                var pay_id = button.data('pay_id');
 
-            $('#editModal #pay_id').val(pay_id);
-            $('#editModal').modal('show'); // Show the modal
+                $('#editModal #pay_id').val(pay_id);
+                $('#editModal').modal('show'); // Show the modal
+            });
+
+            var result = <?php echo json_encode($_GET); ?>;
+            if (result.success) {
+                $.post('<?php echo site_url('pay/update'); ?>', { pay_id: result.data, status: 'Paid' });
+            }
         });
-        
-        var result = <?php echo json_encode($_GET);?>;
-        if(result.success){
-            $.post('<?php echo site_url('pay/update'); ?>',{pay_id:result.data, status:'Paid'});
-        }
-    });
     </script>
 </body>
+
 </html>

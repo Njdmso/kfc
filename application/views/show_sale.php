@@ -120,7 +120,7 @@
 
         <div class="sidebar">
             <ul class="navbar-nav">
-                <?php if ($user['role'] === 'admin' || $user['role'] === 'employee'): ?>
+                <?php if ($user['role'] === 'admin'): ?>
                     <li class="nav-item">
                         <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-chart-bar"></i>
                             Dashboard</a>
@@ -131,6 +131,18 @@
                     <li class="nav-item">
                         <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage
                             Users</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'hr'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i>HRM</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('employee'); ?>"><i
+                                    class="fa fa-warehouse"></i> Employees</a>
+                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i
+                                    class="fa fa-cart-plus"></i> Payroll</a>
+                        </ul>
                     </li>
                 <?php endif; ?>
 
@@ -162,7 +174,7 @@
                             <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i>
                                 Buys</a>
                             <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i>
-                                Manage Order</a>
+                                Orders</a>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -171,11 +183,23 @@
                     <li class="nav-item">
                         <a class="sidebar-link" href="#"><i class="fa fa-chart-bar"></i> Report</a>
                         <ul class="sub-nav">
-                            <a class="sidebar-link" href="<?php echo site_url('dataanalytics'); ?>"><i
+                            <a class="sidebar-link" href="<?php echo site_url('analytics'); ?>"><i
                                     class="fa fa-chart-bar"></i> Data Analytics</a>
                         </ul>
                     </li>
                 <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link"
+                            href="http://192.168.10.128/RBBI/index.php/login/bank?url=<?php echo site_url('dashboard'); ?>"><i
+                                class="fa fa-chart-bar"></i> Bank Account</a>
+                    </li>
+                <?php endif; ?>
+
+                <li class="nav-item">
+                    <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -283,10 +307,10 @@
             var orders = []; // Array to store the orders
 
 
-            var result = <?php echo json_encode($_GET);?>;
-            
-            if(result.success){
-                
+            var result = <?php echo json_encode($_GET); ?>;
+
+            if (result.success) {
+
                 orders = JSON.parse(window.atob(result.data));
                 $('#order-data').val(JSON.stringify(orders));
                 document.getElementById('sale_add').submit();
@@ -309,7 +333,7 @@
                 };
                 orders.push(order); // Add the order to the orders array
                 updateOrders(); // Update the orders list
-               
+
             });
 
             // Handle order quantity change
@@ -335,7 +359,7 @@
                 // Pass the orders data to the other form or perform any desired action
                 $('#order-data').val(JSON.stringify(orders)); // Convert orders array to JSON string and set as hidden input value
             });
-            
+
             //Handle pay with rbbi click
             $('#pay-rbbi-button').click(function () {
 
@@ -344,13 +368,13 @@
                 var totalAmount = parseFloat($('#total-value').text());
 
                 // Construct the RBBI payment URL with the total amount
-                var rbbiUrl = 'http://192.168.10.128/RBBI/index.php/access/index/55/' + totalAmount + '?url=http://[::1]/kfc/index.php/sale/&data='+window.btoa(JSON.stringify(orders));
+                var rbbiUrl = 'http://192.168.10.128/RBBI/index.php/access/index/55/' + totalAmount + '?url=http://[::1]/kfc/index.php/sale/&data=' + window.btoa(JSON.stringify(orders));
 
                 // Redirect to the RBBI payment URL
                 window.location.href = rbbiUrl;
             });
 
-         
+
 
 
             // Function to update the orders list

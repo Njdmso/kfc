@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,8 @@
             display: flex;
             min-height: 100vh;
         }
-        .container{
+
+        .container {
             margin-top: 80px;
         }
 
@@ -37,7 +39,8 @@
 
         .sidebar {
             position: fixed;
-            top: 56px; /* Height of the top navbar */
+            top: 56px;
+            /* Height of the top navbar */
             left: 0;
             height: 100%;
             width: 200px;
@@ -48,10 +51,10 @@
         }
 
         .sidebar-link {
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
         }
 
         .content {
@@ -75,7 +78,7 @@
             display: none;
         }
 
-        .nav-item:hover .sub-nav{
+        .nav-item:hover .sub-nav {
             display: block;
         }
 
@@ -88,7 +91,7 @@
             font-size: 14px;
             text-decoration: none;
         }
-        
+
         .sub-nav a:hover {
             background-color: black;
         }
@@ -99,69 +102,107 @@
     </style>
 
 </head>
+
 <body>
 
 
-<div class="content">
-    <nav class="navbar navbar-dark bg-dark">
-    <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg" style="width: 60px; height: auto; margin-left: 50px;">
-      <a class="navbar-brand" href="#"></a>
-      <a class="text-white"><i class="fas fa-user"></i> <?php echo $user['role']; ?></a>
-      <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
-    </nav>
+    <div class="content">
+        <nav class="navbar navbar-dark bg-dark">
+            <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg"
+                style="width: 60px; height: auto; margin-left: 50px;">
+            <a class="navbar-brand" href="#"></a>
+            <a class="text-white"><i class="fas fa-user"></i>
+                <?php echo $user['role']; ?>
+            </a>
+            <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
+        </nav>
 
-    <div class="sidebar">
-        <ul class="navbar-nav">
-            <?php if ($user['role'] === 'admin' || $user['role'] === 'employee') : ?>
-                <li class="nav-item">
-                <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-chart-bar"></i> Dashboard</a>
-                </li>
-            <?php endif; ?>
+        <div class="sidebar">
+            <ul class="navbar-nav">
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-chart-bar"></i>
+                            Dashboard</a>
+                    </li>
+                <?php endif; ?>
 
-            <?php if ($user['role'] === 'admin') : ?>
-                <li class="nav-item">
-                    <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage Users</a>
-                </li>
-            <?php endif; ?>
-                
-            <?php if ($user['role'] === 'admin' || $user['role'] === 'manager') : ?>
-                <li class="nav-item">
-                <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i> Manage Inventory</a>
-                <ul class="sub-nav">
-                <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i class="fa fa-warehouse"></i> Invetory</a>
-                <a class="sidebar-link" href="<?php echo site_url('purchase'); ?>"><i class="fa fa-warehouse"></i> Purchase</a>
-                </ul>
-                </li>
-            <?php endif; ?>
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('user'); ?>"><i class="fas fa-users"></i> Manage
+                            Users</a>
+                    </li>
+                <?php endif; ?>
 
-            <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier') : ?>
-                <li class="nav-item">
-                    <a class="sidebar-link" href="<?php echo site_url('sale'); ?>"><i class="fas fa-dollar-sign"></i> Sales</a>
-                </li>
-             <?php endif; ?>
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'hr'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i>HRM</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('employee'); ?>"><i
+                                    class="fa fa-warehouse"></i> Employees</a>
+                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i
+                                    class="fa fa-cart-plus"></i> Payroll</a>
+                        </ul>
+                    </li>
+                <?php endif; ?>
 
-            <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant') : ?>
-                <li class="nav-item">
-                <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
-                <ul class="sub-nav">
-                    <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i> Payment Proccessing</a>
-                    <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i> Buys</a>
-                    <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i> Orders</a>
-                </ul>
-                </li>
-            <?php endif; ?>
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'manager'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i> Manage Inventory</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i
+                                    class="fa fa-warehouse"></i> Invetory</a>
+                            <a class="sidebar-link" href="<?php echo site_url('purchase'); ?>"><i
+                                    class="fa fa-warehouse"></i> Purchase</a>
+                        </ul>
+                    </li>
+                <?php endif; ?>
 
-            <?php if ($user['role'] === 'admin') : ?>
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'cashier'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('sale'); ?>"><i class="fas fa-dollar-sign"></i>
+                            Sales</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i>
+                                Payment Proccessing</a>
+                            <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i>
+                                Buys</a>
+                            <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i>
+                                Orders</a>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="#"><i class="fa fa-chart-bar"></i> Report</a>
+                        <ul class="sub-nav">
+                            <a class="sidebar-link" href="<?php echo site_url('analytics'); ?>"><i
+                                    class="fa fa-chart-bar"></i> Data Analytics</a>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link"
+                            href="http://192.168.10.128/RBBI/index.php/login/bank?url=<?php echo site_url('dashboard'); ?>"><i
+                                class="fa fa-chart-bar"></i> Bank Account</a>
+                    </li>
+                <?php endif; ?>
+
                 <li class="nav-item">
-                <a class="sidebar-link" href="#"><i class="fa fa-chart-bar"></i> Report</a>
-                <ul class="sub-nav">
-                    <a class="sidebar-link" href="<?php echo site_url('dataanalytics'); ?>"><i class="fa fa-chart-bar"></i> Data Analytics</a>
-                </ul>
+                    <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
                 </li>
-            <?php endif; ?>
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
 
 
     <div class="container">
@@ -175,7 +216,7 @@
                 </div>
             </div>
         </form>
-        
+
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -190,24 +231,35 @@
             <tbody>
                 <?php foreach ($buys as $buy): ?>
                     <tr>
-                        <td><?php echo $buy['buy_id']; ?></td>
+                        <td>
+                            <?php echo $buy['buy_id']; ?>
+                        </td>
                         <td>
                             <div>
-                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $buy['img']; ?>" />
+                                <img style='width: 50px; height: auto;'
+                                    src="<?php echo UPLOADS_BASE_URL . $buy['img']; ?>" />
                             </div>
                         </td>
 
-                        <td><?php echo $buy['name']; ?></td>
-                        <td><?php echo $buy['stock']; ?></td>
-                        <td><?php echo $buy['price']; ?></td>
-                        <td><?php echo $buy['datebuy']; ?></td>
+                        <td>
+                            <?php echo $buy['name']; ?>
+                        </td>
+                        <td>
+                            <?php echo $buy['stock']; ?>
+                        </td>
+                        <td>
+                            <?php echo $buy['price']; ?>
+                        </td>
+                        <td>
+                            <?php echo $buy['datebuy']; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
 
 
-        
+
 
     </div>
 
@@ -215,7 +267,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 
-    
+
 
     <!-- Bootstrap JS (optional, if you need any JavaScript functionality) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -224,4 +276,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>

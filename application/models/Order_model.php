@@ -10,7 +10,7 @@
 
         public function search_order($keyword) {
             // Perform a search for users based on the keyword
-            $this->db->or_like('order_id', $keyword);
+            $this->db->like('order_id', $keyword);
             $this->db->or_like('name', $keyword);
             $this->db->or_like('price', $keyword);
             $this->db->or_like('cashier', $keyword);

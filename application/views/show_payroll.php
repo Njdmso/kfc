@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,8 @@
             display: flex;
             min-height: 100vh;
         }
-        .container{
+
+        .container {
             margin-top: 80px;
         }
 
@@ -37,7 +39,8 @@
 
         .sidebar {
             position: fixed;
-            top: 56px; /* Height of the top navbar */
+            top: 56px;
+            /* Height of the top navbar */
             left: 0;
             height: 100%;
             width: 200px;
@@ -48,10 +51,10 @@
         }
 
         .sidebar-link {
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
         }
 
         .content {
@@ -75,7 +78,7 @@
             display: none;
         }
 
-        .nav-item:hover .sub-nav{
+        .nav-item:hover .sub-nav {
             display: block;
         }
 
@@ -88,7 +91,7 @@
             font-size: 14px;
             text-decoration: none;
         }
-        
+
         .sub-nav a:hover {
             background-color: black;
         }
@@ -99,20 +102,25 @@
     </style>
 
 </head>
+
 <body>
 
 
-<div class="content">
-    <nav class="navbar navbar-dark bg-dark">
-    <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg" style="width: 60px; height: auto; margin-left: 50px;">
-      <a class="navbar-brand" href="#"></a>
-      <a class="text-white"><i class="fas fa-user"></i> <?php echo $user['role']; ?></a>
-      <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
-    </nav>
+    <div class="content">
+        <nav class="navbar navbar-dark bg-dark">
+            <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg"
+                style="width: 60px; height: auto; margin-left: 50px;">
+            <a class="navbar-brand" href="#"></a>
+            <a class="text-white"><i class="fas fa-user"></i>
+                <?php echo $user['role']; ?>
+            </a>
+            <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
+        </nav>
 
-    <div class="sidebar">
-        <ul class="navbar-nav">
-        <?php if ($user['role'] === 'admin'): ?>
+        <div class="sidebar">
+            <ul class="navbar-nav">
+                <?php if ($user['role'] === 'admin'): ?>
                     <li class="nav-item">
                         <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-chart-bar"></i>
                             Dashboard</a>
@@ -192,113 +200,78 @@
                 <li class="nav-item">
                     <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
                 </li>
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
 
 
     <div class="container">
 
-
         <!-- Search Bar -->
-        <form action="<?php echo site_url('searchproduct/search'); ?>" method="post" class="mb-3">
+        <form action="<?php echo site_url('payroll/search'); ?>" method="post" class="mb-3">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Product" name="keyword">
+                <input type="text" class="form-control" placeholder="Search Employee" name="keyword">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
                 </div>
             </div>
         </form>
-                
+
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th>Product_id</th>
-                    <th>Image</th>
+                    <th>Employee_id</th>
                     <th>Name</th>
-                    <th>Stock</th>
-                    <th>Price</th>
-                    <!-- <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th> -->
+                    <th>Role</th>
+                    <th>Datehired</th>
+                    <th>Salary</th>
+                    <th>Bank Account</th>
+                    <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal"
+                            style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($products as $product): ?>
+                <?php foreach ($payrolls as $payroll): ?>
                     <tr>
-                        <td><?php echo $product['product_id']; ?></td>
                         <td>
-                            <div>
-                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $product['img']; ?>" />
+                            <?php echo $payroll['employee_id']; ?>
+                        </td>
+                        <td>
+                            <?php echo $payroll['name']; ?>
+                        </td>
+                        <td>
+                            <?php echo $payroll['role']; ?>
+                        </td>
+                        <td>
+                            <?php echo $payroll['datehired']; ?>
+                        </td>
+                        <td>
+                            <?php echo $payroll['salary']; ?>
+                        </td>
+                        <td>
+                            <?php echo $payroll['bankaccount']; ?>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                <a type="button" class="btn btn-primary"
+                                    href='http://192.168.10.128/RBBI/index.php/access/index/<?php echo $payroll['bankaccount']; ?>/<?php echo $payroll['salary']; ?>?url=http://[::1]/kfc/index.php/pay/&data=<?php echo $payroll_id['payroll_id'] ?>'><i
+                                        class="fas fa-edit"></i>Pay with RBBI</a>
                             </div>
                         </td>
-
-                        <td><?php echo $product['name']; ?></td>
-                        <td><?php echo $product['stock']; ?></td>
-                        <td><?php echo $product['price']; ?></td>
-                        <!-- <td>
-                            <div class="btn-group" role="group" aria-label="Actions">
-                                <a href="<?php echo site_url('updateuser'); ?>" class="btn btn-primary" style="margin-left: 10px;">
-                                    <i class="fas fa-edit"></i> Edit</a>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                            </div>
-                        </td> -->
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
-        <!-- Add Product Modal -->        
-        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add New Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="<?php echo site_url('product/add_prod'); ?>" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="img" class="block text-gray-700 font-bold mb-2">Image:</label>
-                        <input type="file" name="img" id="img" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
-                        <input type="text" name="name" id="name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="stock">Stock</label>
-                        <input type="text" class="form-control" id="stock" name="stock" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-        </div>
-
-        
 
     </div>
-
-    <!-- Modal Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-
-    
-
-    <!-- Bootstrap JS (optional, if you need any JavaScript functionality) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
