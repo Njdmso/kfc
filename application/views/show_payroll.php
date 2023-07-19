@@ -136,13 +136,11 @@
 
                 <?php if ($user['role'] === 'admin' || $user['role'] === 'hr'): ?>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i>HRM</a>
+                        <a class="sidebar-link" href="#"><i class="fa fa-user-tie"></i>HRM</a>
                         <ul class="sub-nav">
-                            <a class="sidebar-link" href="<?php echo site_url('employee'); ?>"><i
-                                    class="fa fa-warehouse"></i>
+                            <a class="sidebar-link" href="<?php echo site_url('employee'); ?>"><i class="fa fa-users"></i>
                                 Employees</a>
-                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i
-                                    class="fa fa-cart-plus"></i>
+                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i class="fa fa-coins"></i>
                                 Payroll</a>
                         </ul>
                     </li>
@@ -153,10 +151,9 @@
                         <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i> Manage Inventory</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i
-                                    class="fa fa-warehouse"></i>
+                                    class="fa fa-layer-group"></i>
                                 Invetory</a>
-                            <a class="sidebar-link" href="<?php echo site_url('purchase'); ?>"><i
-                                    class="fa fa-warehouse"></i>
+                            <a class="sidebar-link" href="<?php echo site_url('purchase'); ?>"><i class="fa fa-store"></i>
                                 Purchase</a>
                         </ul>
                     </li>
@@ -171,12 +168,12 @@
 
                 <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant'): ?>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
+                        <a class="sidebar-link" href="#"><i class="fas fa-money-check"></i>Accounting</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i>
                                 Payment
                                 Proccessing</a>
-                            <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i>
+                            <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-credit-card"></i>
                                 Buys</a>
                             <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i>
                                 Orders</a>
