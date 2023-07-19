@@ -197,9 +197,12 @@
                     </li>
                 <?php endif; ?>
 
-                <li class="nav-item">
-                    <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
-                </li>
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>
+                            Others</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
@@ -226,8 +229,7 @@
                     <th>Datehired</th>
                     <th>Salary</th>
                     <th>Bank Account</th>
-                    <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal"
-                            style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -254,8 +256,10 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Actions">
                                 <a type="button" class="btn btn-primary"
-                                    href='http://192.168.10.128/RBBI/index.php/access/index/<?php echo $payroll['bankaccount']; ?>/<?php echo $payroll['salary']; ?>?url=http://[::1]/kfc/index.php/pay/&data=<?php echo $payroll_id['payroll_id'] ?>'><i
-                                        class="fas fa-edit"></i>Pay with RBBI</a>
+                                    href="http://192.168.10.128/RBBI/index.php/access/index/<?php echo ($payroll['bankaccount']); ?>/<?php echo ($payroll['salary']); ?>?url=http://192.168.10.89/kfc/index.php/payroll/<?php echo ($payroll['employee_id']); ?>">
+                                    <i class="fas fa-edit"></i>Pay with RBBI
+                                </a>
+
                             </div>
                         </td>
                     </tr>

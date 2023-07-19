@@ -198,9 +198,12 @@
                     </li>
                 <?php endif; ?>
 
-                <li class="nav-item">
-                    <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
-                </li>
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>
+                            Others</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

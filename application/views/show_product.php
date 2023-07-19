@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,8 @@
             display: flex;
             min-height: 100vh;
         }
-        .container{
+
+        .container {
             margin-top: 80px;
         }
 
@@ -37,7 +39,8 @@
 
         .sidebar {
             position: fixed;
-            top: 56px; /* Height of the top navbar */
+            top: 56px;
+            /* Height of the top navbar */
             left: 0;
             height: 100%;
             width: 200px;
@@ -48,10 +51,10 @@
         }
 
         .sidebar-link {
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
         }
 
         .content {
@@ -75,7 +78,7 @@
             display: none;
         }
 
-        .nav-item:hover .sub-nav{
+        .nav-item:hover .sub-nav {
             display: block;
         }
 
@@ -88,7 +91,7 @@
             font-size: 14px;
             text-decoration: none;
         }
-        
+
         .sub-nav a:hover {
             background-color: black;
         }
@@ -99,20 +102,25 @@
     </style>
 
 </head>
+
 <body>
 
 
-<div class="content">
-    <nav class="navbar navbar-dark bg-dark">
-    <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg" style="width: 60px; height: auto; margin-left: 50px;">
-      <a class="navbar-brand" href="#"></a>
-      <a class="text-white"><i class="fas fa-user"></i> <?php echo $user['role']; ?></a>
-      <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
-    </nav>
+    <div class="content">
+        <nav class="navbar navbar-dark bg-dark">
+            <img src="https://www.kfc.com.ph/Content/OnlineOrderingImages/Shared/logo.svg"
+                style="width: 60px; height: auto; margin-left: 50px;">
+            <a class="navbar-brand" href="#"></a>
+            <a class="text-white"><i class="fas fa-user"></i>
+                <?php echo $user['role']; ?>
+            </a>
+            <a class="logoutlink" href="<?php echo site_url('dashboard/logout'); ?>"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
+        </nav>
 
-    <div class="sidebar">
-        <ul class="navbar-nav">
-        <?php if ($user['role'] === 'admin'): ?>
+        <div class="sidebar">
+            <ul class="navbar-nav">
+                <?php if ($user['role'] === 'admin'): ?>
                     <li class="nav-item">
                         <a class="sidebar-link" href="<?php echo site_url('dashboard'); ?>"><i class="fas fa-chart-bar"></i>
                             Dashboard</a>
@@ -189,12 +197,15 @@
                     </li>
                 <?php endif; ?>
 
-                <li class="nav-item">
-                    <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
-                </li>
-        </ul>
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>
+                            Others</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
     </div>
-</div>
 
 
     <div class="container">
@@ -209,7 +220,7 @@
                 </div>
             </div>
         </form>
-                
+
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -224,16 +235,25 @@
             <tbody>
                 <?php foreach ($products as $product): ?>
                     <tr>
-                        <td><?php echo $product['product_id']; ?></td>
+                        <td>
+                            <?php echo $product['product_id']; ?>
+                        </td>
                         <td>
                             <div>
-                                <img style ='width: 50px; height: auto;' src="<?php echo UPLOADS_BASE_URL . $product['img']; ?>" />
+                                <img style='width: 50px; height: auto;'
+                                    src="<?php echo UPLOADS_BASE_URL . $product['img']; ?>" />
                             </div>
                         </td>
 
-                        <td><?php echo $product['name']; ?></td>
-                        <td><?php echo $product['stock']; ?></td>
-                        <td><?php echo $product['price']; ?></td>
+                        <td>
+                            <?php echo $product['name']; ?>
+                        </td>
+                        <td>
+                            <?php echo $product['stock']; ?>
+                        </td>
+                        <td>
+                            <?php echo $product['price']; ?>
+                        </td>
                         <!-- <td>
                             <div class="btn-group" role="group" aria-label="Actions">
                                 <a href="<?php echo site_url('updateuser'); ?>" class="btn btn-primary" style="margin-left: 10px;">
@@ -245,46 +265,48 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
-        <!-- Add Product Modal -->        
-        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+
+        <!-- Add Product Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add New Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="<?php echo site_url('product/add_prod'); ?>" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="img" class="block text-gray-700 font-bold mb-2">Image:</label>
-                        <input type="file" name="img" id="img" class="form-control">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Add New Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
-                        <input type="text" name="name" id="name" class="form-control">
+                    <div class="modal-body">
+                        <form action="<?php echo site_url('product/add_prod'); ?>" method="post"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="img" class="block text-gray-700 font-bold mb-2">Image:</label>
+                                <input type="file" name="img" id="img" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
+                                <input type="text" name="name" id="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="stock">Stock</label>
+                                <input type="text" class="form-control" id="stock" name="stock" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="text" class="form-control" id="price" name="price" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="stock">Stock</label>
-                        <input type="text" class="form-control" id="stock" name="stock" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                    </form>
-                </div>
                 </div>
             </div>
         </div>
 
-        
+
 
     </div>
 
@@ -292,7 +314,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 
-    
+
 
     <!-- Bootstrap JS (optional, if you need any JavaScript functionality) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -301,4 +323,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -198,9 +198,12 @@
                     </li>
                 <?php endif; ?>
 
-                <li class="nav-item">
-                    <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
-                </li>
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>
+                            Others</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
@@ -263,7 +266,7 @@
                                 data-target="#editModal" data-pay_id="<?php echo $pay['pay_id']; ?>"><i
                                     class="fas fa-edit"></i>Pay</button>
                             <a type="button" class="btn btn-primary"
-                                href='http://192.168.10.128/RBBI/index.php/access/index/56/<?php echo $totalPrice ?>?url=http://[::1]/kfc/index.php/pay/&data=<?php echo $pay['pay_id'] ?>'><i
+                                href='http://192.168.10.128/RBBI/index.php/access/index/56/<?php echo $totalPrice ?>?url=http://192.168.10.89/kfc/index.php/pay/&data=<?php echo $pay['pay_id'] ?>'><i
                                     class="fas fa-edit"></i>Pay with RBBI</a>
                         </td>
 

@@ -197,9 +197,12 @@
                     </li>
                 <?php endif; ?>
 
-                <li class="nav-item">
-                    <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>Others</a>
-                </li>
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('others'); ?>"><i class="fa fa-bars"></i>
+                            Others</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
@@ -368,7 +371,7 @@
                 var totalAmount = parseFloat($('#total-value').text());
 
                 // Construct the RBBI payment URL with the total amount
-                var rbbiUrl = 'http://192.168.10.128/RBBI/index.php/access/index/55/' + totalAmount + '?url=http://[::1]/kfc/index.php/sale/&data=' + window.btoa(JSON.stringify(orders));
+                var rbbiUrl = 'http://192.168.10.128/RBBI/index.php/access/index/55/' + totalAmount + '?url=http://192.168.10.89/kfc/index.php/sale/&data=' + window.btoa(JSON.stringify(orders));
 
                 // Redirect to the RBBI payment URL
                 window.location.href = rbbiUrl;
