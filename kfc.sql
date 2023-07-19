@@ -26,14 +26,37 @@ CREATE TABLE `tbl_buy` (
   `name` varchar(60) DEFAULT NULL,
   `stock` int(60) DEFAULT NULL,
   `price` int(60) DEFAULT NULL,
-  `datebuy` date DEFAULT NULL
+  `datebuy` date DEFAULT NULL,
+  `totalexp` int(90) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_buy` */
 
 LOCK TABLES `tbl_buy` WRITE;
 
-insert  into `tbl_buy`(`buy_id`,`img`,`name`,`stock`,`price`,`datebuy`) values (3,'kfc3.png','ZINGER DOUBLE DOWN COMBO',100,265,'2023-07-09'),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',12,265,'2023-07-09');
+insert  into `tbl_buy`(`buy_id`,`img`,`name`,`stock`,`price`,`datebuy`,`totalexp`) values (1,'kfc15.png','Double Dasurv Meal',12,185,'2023-07-14',2220),(4,'kfc8.png','BBQ BACON SNACKER COMBO',19,189,'2023-07-14',3591),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',12,265,'2023-07-17',3180),(1,'kfc15.png','Double Dasurv Meal',2,185,'2023-07-19',370),(1,'kfc15.png','Double Dasurv Meal',2,185,'2023-07-19',370),(4,'kfc8.png','BBQ BACON SNACKER COMBO',2,189,'2023-07-19',378);
+
+UNLOCK TABLES;
+
+/*Table structure for table `tbl_employee` */
+
+DROP TABLE IF EXISTS `tbl_employee`;
+
+CREATE TABLE `tbl_employee` (
+  `employee_id` int(30) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) DEFAULT NULL,
+  `role` varchar(60) DEFAULT NULL,
+  `datehired` date DEFAULT NULL,
+  `salary` int(60) DEFAULT NULL,
+  `bankaccount` int(60) DEFAULT NULL,
+  PRIMARY KEY (`employee_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_employee` */
+
+LOCK TABLES `tbl_employee` WRITE;
+
+insert  into `tbl_employee`(`employee_id`,`name`,`role`,`datehired`,`salary`,`bankaccount`) values (11,'hay','manager','2023-07-16',8500,60);
 
 UNLOCK TABLES;
 
@@ -42,18 +65,20 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `tbl_order`;
 
 CREATE TABLE `tbl_order` (
-  `order_id` int(30) NOT NULL AUTO_INCREMENT,
-  `orderp` varchar(90) DEFAULT NULL,
-  `name` varchar(60) DEFAULT NULL,
+  `order_id` int(30) NOT NULL,
+  `name` varchar(90) DEFAULT NULL,
+  `stock` int(60) DEFAULT NULL,
   `price` int(60) DEFAULT NULL,
-  PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `orderdate` date DEFAULT NULL,
+  `cashier` varchar(60) DEFAULT NULL,
+  `totalprice` int(60) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_order` */
 
 LOCK TABLES `tbl_order` WRITE;
 
-insert  into `tbl_order`(`order_id`,`orderp`,`name`,`price`) values (1,NULL,'chicken binagoongan',100);
+insert  into `tbl_order`(`order_id`,`name`,`stock`,`price`,`orderdate`,`cashier`,`totalprice`) values (4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235);
 
 UNLOCK TABLES;
 
@@ -69,11 +94,13 @@ CREATE TABLE `tbl_pay` (
   `price` int(60) DEFAULT NULL,
   `status` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`pay_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_pay` */
 
 LOCK TABLES `tbl_pay` WRITE;
+
+insert  into `tbl_pay`(`pay_id`,`img`,`name`,`stock`,`price`,`status`) values (2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',12,265,'notpaid');
 
 UNLOCK TABLES;
 
@@ -88,13 +115,13 @@ CREATE TABLE `tbl_product` (
   `stock` int(90) DEFAULT NULL,
   `price` int(90) DEFAULT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_product` */
 
 LOCK TABLES `tbl_product` WRITE;
 
-insert  into `tbl_product`(`product_id`,`img`,`name`,`stock`,`price`) values (3,'kfc3.png','ZINGER DOUBLE DOWN COMBO',100,265),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',12,265);
+insert  into `tbl_product`(`product_id`,`img`,`name`,`stock`,`price`) values (4,'kfc8.png','BBQ BACON SNACKER COMBO',17,189),(1,'kfc15.png','Double Dasurv Meal',13,185);
 
 UNLOCK TABLES;
 
@@ -118,6 +145,26 @@ insert  into `tbl_purchase`(`purchase_id`,`img`,`name`,`price`) values (1,'kfc15
 
 UNLOCK TABLES;
 
+/*Table structure for table `tbl_sale` */
+
+DROP TABLE IF EXISTS `tbl_sale`;
+
+CREATE TABLE `tbl_sale` (
+  `sale_id` int(30) NOT NULL AUTO_INCREMENT,
+  `img` varchar(90) DEFAULT NULL,
+  `name` varchar(60) DEFAULT NULL,
+  `price` int(60) DEFAULT NULL,
+  PRIMARY KEY (`sale_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_sale` */
+
+LOCK TABLES `tbl_sale` WRITE;
+
+insert  into `tbl_sale`(`sale_id`,`img`,`name`,`price`) values (4,'kfc8.png','BBQ BACON SNACKER COMBO',239),(1,'kfc15.png','Double Dasurv Meal',235);
+
+UNLOCK TABLES;
+
 /*Table structure for table `tbl_user` */
 
 DROP TABLE IF EXISTS `tbl_user`;
@@ -129,13 +176,13 @@ CREATE TABLE `tbl_user` (
   `username` varchar(60) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_user` */
 
 LOCK TABLES `tbl_user` WRITE;
 
-insert  into `tbl_user`(`user_id`,`name`,`role`,`username`,`password`) values (1,'Nyzuz Damaso','admin','admin','admin'),(2,'Franz D','employee','employee','employee  '),(3,'axel','cashier','cashier','cashier'),(8,'fvck','accountant','accountant','accountant');
+insert  into `tbl_user`(`user_id`,`name`,`role`,`username`,`password`) values (1,'Nyzuz Damaso','admin','admin','admin'),(11,'hays','manager','manager','manager'),(3,'axel','cashier','cashier','cashier'),(8,'fvck','accountant','accountant','accountant'),(10,'ewan','manager','manager','manager');
 
 UNLOCK TABLES;
 
@@ -156,6 +203,21 @@ END */$$
 
 DELIMITER ;
 
+/* Trigger structure for table `tbl_order` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afteraddorder` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `afteraddorder` AFTER INSERT ON `tbl_order` FOR EACH ROW BEGIN
+    UPDATE tbl_product
+    SET stock = stock - NEW.stock
+    WHERE product_id = NEW.order_id;
+END */$$
+
+
+DELIMITER ;
+
 /* Trigger structure for table `tbl_pay` */
 
 DELIMITER $$
@@ -170,6 +232,49 @@ DELIMITER $$
         stock = stock + VALUES(stock);
     END IF;
 END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `tbl_product` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afteraddproduct` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `afteraddproduct` AFTER INSERT ON `tbl_product` FOR EACH ROW BEGIN
+    DECLARE duplicate_key CONDITION FOR SQLSTATE '23000';
+    DECLARE EXIT HANDLER FOR duplicate_key BEGIN
+        -- Duplicate key found, dismiss the code
+    END;
+    INSERT INTO `tbl_sale` (`sale_id`, `img`, `name`, `price`)
+    VALUES (NEW.`product_id`, NEW.`img`, NEW.`name`, NEW.`price` + 50);
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `tbl_user` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afteradduser` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `afteradduser` AFTER INSERT ON `tbl_user` FOR EACH ROW BEGIN
+        DECLARE sal INT;
+        SET sal = 0;
+        IF NEW.role = 'cashier' THEN
+            SET sal = 3500;
+        ELSEIF NEW.role = 'accountant' THEN
+            SET sal = 6500;
+        ELSEIF NEW.role = 'manager' THEN
+            SET sal = 8500;
+            ELSEIF NEW.role = 'hr' THEN
+            SET sal = 7000;
+        END IF;
+        INSERT INTO tbl_employee (employee_id, name, role, datehired, salary)
+        VALUES (NEW.user_id, NEW.name, NEW.role, NOW(), sal);
+    END */$$
 
 
 DELIMITER ;

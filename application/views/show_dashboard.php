@@ -183,7 +183,9 @@
             <a class="sidebar-link" href="#"><i class="fa fa-chart-bar"></i> Report</a>
             <ul class="sub-nav">
               <a class="sidebar-link" href="<?php echo site_url('analytics'); ?>"><i class="fa fa-chart-bar"></i> Data
-                Analytics</a>
+                Analytics Sales</a>
+                <a class="sidebar-link" href="<?php echo site_url('expense'); ?>"><i class="fa fa-chart-bar"></i> Data
+                Analytics Expenses</a>
             </ul>
           </li>
         <?php endif; ?>

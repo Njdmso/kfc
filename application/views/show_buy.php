@@ -139,9 +139,11 @@
                         <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i>HRM</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('employee'); ?>"><i
-                                    class="fa fa-warehouse"></i> Employees</a>
+                                    class="fa fa-warehouse"></i>
+                                Employees</a>
                             <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i
-                                    class="fa fa-cart-plus"></i> Payroll</a>
+                                    class="fa fa-cart-plus"></i>
+                                Payroll</a>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -151,9 +153,11 @@
                         <a class="sidebar-link" href="#"><i class="fa fa-warehouse"></i> Manage Inventory</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('product'); ?>"><i
-                                    class="fa fa-warehouse"></i> Invetory</a>
+                                    class="fa fa-warehouse"></i>
+                                Invetory</a>
                             <a class="sidebar-link" href="<?php echo site_url('purchase'); ?>"><i
-                                    class="fa fa-warehouse"></i> Purchase</a>
+                                    class="fa fa-warehouse"></i>
+                                Purchase</a>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -170,7 +174,8 @@
                         <a class="sidebar-link" href="#"><i class="fas fa-money-bill"></i>Accounting</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i>
-                                Payment Proccessing</a>
+                                Payment
+                                Proccessing</a>
                             <a class="sidebar-link" href="<?php echo site_url('buy'); ?>"><i class="fa fa-warehouse"></i>
                                 Buys</a>
                             <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i>
@@ -184,7 +189,11 @@
                         <a class="sidebar-link" href="#"><i class="fa fa-chart-bar"></i> Report</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('analytics'); ?>"><i
-                                    class="fa fa-chart-bar"></i> Data Analytics</a>
+                                    class="fa fa-chart-bar"></i> Data
+                                Analytics Sales</a>
+                            <a class="sidebar-link" href="<?php echo site_url('expense'); ?>"><i
+                                    class="fa fa-chart-bar"></i> Data
+                                Analytics Expenses</a>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -193,7 +202,7 @@
                     <li class="nav-item">
                         <a class="sidebar-link"
                             href="http://192.168.10.128/RBBI/index.php/login/bank?url=<?php echo site_url('dashboard'); ?>"><i
-                                class="fa fa-chart-bar"></i> Bank Account</a>
+                                class="fa fa-piggy-bank"></i> Bank Account</a>
                     </li>
                 <?php endif; ?>
 
@@ -229,6 +238,7 @@
                     <th>Stock</th>
                     <th>Price</th>
                     <th>Buy Date</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -256,9 +266,32 @@
                         <td>
                             <?php echo $buy['datebuy']; ?>
                         </td>
+                        <td>
+                            <?php echo $buy['totalexp']; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+            <!-- Table footer code -->
+            <tfoot class="tfoot-light">
+                <tr>
+                    <td colspan="2"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Total Expense:</strong></td>
+                    <td>
+                        <?php
+                        $total = 0; // Variable to hold the total price
+                        foreach ($buys as $buy) {
+                            $total += $buy['totalexp']; // Add the price to the total
+                        }
+
+                        echo $total; // Output the total
+                        ?>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
 
 
