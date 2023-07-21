@@ -32,6 +32,25 @@
                 $data['username'],
                 $data['password']
             );
+
+
+            $user = $this->session->userData('user');
+        
+            $date = date('Y-m-d');
+            $stat = "Add User";
+            $data = array(
+                'user' => $user['name'],
+                'status' => $stat,
+                'date' => $date
+    
+            );
+            $this->User_model->create_audit(
+                $data['user'],
+                $data['status'],
+                $data['date']
+            );
+
+
             redirect('user');
         }
     }

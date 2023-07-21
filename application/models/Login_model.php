@@ -1,7 +1,9 @@
 <?php
-class Login_model extends CI_Model {
+class Login_model extends CI_Model
+{
 
-  public function get_user($username, $password) {
+  public function get_user($username, $password)
+  {
     $this->db->select('*');
     $this->db->from('tbl_user');
     $this->db->where('username', $username);
@@ -9,6 +11,16 @@ class Login_model extends CI_Model {
     $query = $this->db->get();
     // $query->num_rows();
     return $query->row();
+  }
+
+  public function create_audit($audit, $status, $date)
+  {
+    $data = array(
+      'user' => $audit,
+      'status' => $status,
+      'date' => $date
+    );
+    $this->db->insert('tbl_audit', $data);
   }
 }
 ?>

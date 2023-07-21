@@ -10,7 +10,6 @@ class Login extends CI_Controller {
   public function index() {
     $this->load->view('show_login');
   }
-
   public function authenticate() {
     $username = $this->input->post('username');
     $password = $this->input->post('password');
@@ -26,6 +25,21 @@ class Login extends CI_Controller {
         'password' => $user->password,
       );
       $this->session->set_userdata('user', $userData);
+
+      $this->load->model('Login_model'); //Load the model
+      $date = date('Y-m-d');
+      $stat = "Loggedin";
+      $data = array(
+          'user' => $user->name,
+          'status' => $stat,
+          'date' => $date
+      );
+      $this->Login_model->create_audit(
+          $data['user'],
+          $data['status'],
+          $data['date']
+      );
+
       redirect('dashboard');
     } else {
       $data['error'] = 'Invalid username or password';

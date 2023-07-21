@@ -136,13 +136,18 @@
 
                 <?php if ($user['role'] === 'admin' || $user['role'] === 'hr'): ?>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="#"><i class="fa fa-user-tie"></i>HRM</a>
+                        <a class="sidebar-link" href="#"><i class="fa fa-user-tie"></i> HRM</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('employee'); ?>"><i class="fa fa-users"></i>
                                 Employees</a>
-                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i class="fa fa-coins"></i>
-                                Payroll</a>
                         </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'manager'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('productsource'); ?>"><i
+                                class="fa fa-plus-square"></i> Productsource</a>
                     </li>
                 <?php endif; ?>
 
@@ -168,7 +173,7 @@
 
                 <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant'): ?>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="#"><i class="fas fa-money-check"></i>Accounting</a>
+                        <a class="sidebar-link" href="#"><i class="fas fa-money-check"></i> Accounting</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i>
                                 Payment
@@ -177,6 +182,8 @@
                                 Buys</a>
                             <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i>
                                 Orders</a>
+                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i class="fa fa-coins"></i>
+                                Payroll</a>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -192,6 +199,13 @@
                                     class="fa fa-chart-bar"></i> Data
                                 Analytics Expenses</a>
                         </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('auditlog'); ?>"><i class="fa fa-flag"></i>
+                            Auditlogs</a>
                     </li>
                 <?php endif; ?>
 
@@ -262,7 +276,7 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Actions">
                                 <a type="button" class="btn btn-primary"
-                                    href="http://192.168.10.128/RBBI/index.php/access/index/<?php echo ($payroll['bankaccount']); ?>/<?php echo ($payroll['salary']); ?>?url=http://192.168.10.89/kfc/index.php/payroll/<?php echo ($payroll['employee_id']); ?>">
+                                    href="http://192.168.10.128/RBBI/index.php/access/index/<?php echo ($payroll['bankaccount']); ?>/<?php echo ($payroll['salary']); ?>?url=http://192.168.10.89/kfc/index.php/payroll/&data=<?php echo ($payroll['employee_id']); ?>">
                                     <i class="fas fa-edit"></i>Pay with RBBI
                                 </a>
 

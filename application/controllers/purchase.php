@@ -45,6 +45,24 @@ class Purchase extends CI_controller
         if ($this->Purchase_model->create_buy($data)) {
             redirect('purchase');
         } else {
+
+            $user = $this->session->userData('user');
+        
+            $this->load->model('User_model'); //Load the model
+            $date = date('Y-m-d');
+            $stat = "Purchase from Supplier";
+            $data = array(
+                'user' => $user['name'],
+                'status' => $stat,
+                'date' => $date
+    
+            );
+            $this->User_model->create_audit(
+                $data['user'],
+                $data['status'],
+                $data['date']
+            );
+            
             redirect('purchase');
         }
     }

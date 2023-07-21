@@ -37,12 +37,34 @@
                 $data['salary'],
                 $data['bankaccount']
             );
+
+
+            $user = $this->session->userData('user');
+        
+            $this->load->model('User_model'); //Load the model
+            $date = date('Y-m-d');
+            $stat = "Add Employee";
+            $data = array(
+                'user' => $user['name'],
+                'status' => $stat,
+                'date' => $date
+    
+            );
+            $this->User_model->create_audit(
+                $data['user'],
+                $data['status'],
+                $data['date']
+            );
+
+
             redirect('employee');
         }
 
         public function update() {
             $this->load->model('Employee_model'); //Load the user_model
+            $edituser = "";
             $data = array(
+                $edituser = $this->input->post('employee_id'),
                 'employee_id' => $this->input->post('employee_id'),
                 'name' => $this->input->post('name'),
                 'role' => $this->input->post('role'),
@@ -57,12 +79,50 @@
                 $data['salary'],
                 $data['bankaccount']
             );
+
+
+            $user = $this->session->userData('user');
+        
+            $this->load->model('User_model'); //Load the model
+            $date = date('Y-m-d');
+            $stat = "Edit Employee id " . $edituser;
+            $data = array(
+                'user' => $user['name'],
+                'status' => $stat,
+                'date' => $date
+    
+            );
+            $this->User_model->create_audit(
+                $data['user'],
+                $data['status'],
+                $data['date']
+            );
+
+
             redirect('employee');
         }
 
         public function delete($employee_id)
         {
             $this->Employee_model->delete_employee($employee_id);
+
+            $user = $this->session->userData('user');
+        
+            $this->load->model('User_model'); //Load the model
+            $date = date('Y-m-d');
+            $stat = "Delete Employee id " . $employee_id;
+            $data = array(
+                'user' => $user['name'],
+                'status' => $stat,
+                'date' => $date
+    
+            );
+            $this->User_model->create_audit(
+                $data['user'],
+                $data['status'],
+                $data['date']
+            );
+
             redirect('employee');
         }
 

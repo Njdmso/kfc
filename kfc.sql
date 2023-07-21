@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v10.00 Beta1
-MySQL - 5.7.36 : Database - kfc
+MySQL - 5.7.14 : Database - kfc
 *********************************************************************
 */
 
@@ -15,6 +15,20 @@ MySQL - 5.7.36 : Database - kfc
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`kfc` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `kfc`;
+
+/*Table structure for table `tbl_audit` */
+
+DROP TABLE IF EXISTS `tbl_audit`;
+
+CREATE TABLE `tbl_audit` (
+  `user` varchar(60) DEFAULT NULL,
+  `status` varchar(60) DEFAULT NULL,
+  `date` date DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_audit` */
+
+insert  into `tbl_audit`(`user`,`status`,`date`) values ('Nyzuz Damasog','Loggedout','2023-07-21'),('Nyzuz Damasog','Loggedin','2023-07-21'),('Nyzuz Damasog','Purchase from Supplier','2023-07-21'),('Nyzuz Damasog','Add Employee','2023-07-21'),('Nyzuz Damasog','Delete Productsource id 13','2023-07-21'),('Nyzuz Damasog','Add Productsource','2023-07-21'),('Nyzuz Damasog','Delete Productsource id 14','2023-07-21'),('Nyzuz Damasog','Loggedin','2023-07-21'),('Nyzuz Damasog','Edit User id 1','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21'),('Nyzuz Damaso','Add User','2023-07-21'),('Nyzuz Damaso','Edit User id 11','2023-07-21'),('Nyzuz Damaso','Edit User id 8','2023-07-21'),('Nyzuz Damaso','Delete User id 13','2023-07-21'),('Nyzuz Damaso','Delete User id 10','2023-07-21'),('Nyzuz Damaso','Edit User id 14','2023-07-21'),('Nyzuz Damaso','Delete User id 14','2023-07-21'),('Nyzuz Damaso','Add User','2023-07-21'),('Nyzuz Damaso','Delete Employee id 13','2023-07-21'),('Nyzuz Damaso','Edit Employee id 11','2023-07-21'),('Nyzuz Damaso','Edit Employee id 15','2023-07-21'),('Nyzuz Damaso','Edit Employee id 11','2023-07-21'),('Nyzuz Damaso','Edit Employee id 12','2023-07-21'),('Nyzuz Damaso','Edit Employee id 14','2023-07-21'),('Nyzuz Damaso','Edit Employee id 15','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21'),('Nyzuz Damaso','Loggedout','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21'),('Nyzuz Damaso','Loggedout','2023-07-21'),('axel','Loggedin','2023-07-21'),('axel','Loggedout','2023-07-21'),('Robert','Loggedin','2023-07-21'),('Robert','Loggedout','2023-07-21'),('Jessica','Loggedin','2023-07-21'),('Jessica','Loggedout','2023-07-21'),('John Roa','Loggedin','2023-07-21'),('John Roa','Loggedout','2023-07-21'),('Nyzuz Damaso','Loggedin','2023-07-21');
 
 /*Table structure for table `tbl_buy` */
 
@@ -32,11 +46,7 @@ CREATE TABLE `tbl_buy` (
 
 /*Data for the table `tbl_buy` */
 
-LOCK TABLES `tbl_buy` WRITE;
-
-insert  into `tbl_buy`(`buy_id`,`img`,`name`,`stock`,`price`,`datebuy`,`totalexp`) values (1,'kfc15.png','Double Dasurv Meal',12,185,'2023-07-14',2220),(4,'kfc8.png','BBQ BACON SNACKER COMBO',19,189,'2023-07-14',3591),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',12,265,'2023-07-17',3180),(1,'kfc15.png','Double Dasurv Meal',2,185,'2023-07-19',370),(1,'kfc15.png','Double Dasurv Meal',2,185,'2023-07-19',370),(4,'kfc8.png','BBQ BACON SNACKER COMBO',2,189,'2023-07-19',378);
-
-UNLOCK TABLES;
+insert  into `tbl_buy`(`buy_id`,`img`,`name`,`stock`,`price`,`datebuy`,`totalexp`) values (1,'kfc15.png','Double Dasurv Meal',12,185,'2023-07-14',2220),(4,'kfc8.png','BBQ BACON SNACKER COMBO',19,189,'2023-07-14',3591),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',12,265,'2023-07-17',3180),(1,'kfc15.png','Double Dasurv Meal',2,185,'2023-07-19',370),(1,'kfc15.png','Double Dasurv Meal',2,185,'2023-07-19',370),(4,'kfc8.png','BBQ BACON SNACKER COMBO',2,189,'2023-07-19',378),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',1,265,'2023-07-21',265),(1,'kfc15.png','Double Dasurv Meal',1,185,'2023-07-21',185);
 
 /*Table structure for table `tbl_employee` */
 
@@ -50,15 +60,11 @@ CREATE TABLE `tbl_employee` (
   `salary` int(60) DEFAULT NULL,
   `bankaccount` int(60) DEFAULT NULL,
   PRIMARY KEY (`employee_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_employee` */
 
-LOCK TABLES `tbl_employee` WRITE;
-
-insert  into `tbl_employee`(`employee_id`,`name`,`role`,`datehired`,`salary`,`bankaccount`) values (11,'hay','manager','2023-07-16',8500,60);
-
-UNLOCK TABLES;
+insert  into `tbl_employee`(`employee_id`,`name`,`role`,`datehired`,`salary`,`bankaccount`) values (11,'hay','manager','2023-07-16',5000,121),(12,'ewan','admin','2023-07-20',0,121),(14,'axels','admin','2023-07-21',1200,121),(15,'John Roa','hr','2023-07-21',7000,121);
 
 /*Table structure for table `tbl_order` */
 
@@ -76,11 +82,7 @@ CREATE TABLE `tbl_order` (
 
 /*Data for the table `tbl_order` */
 
-LOCK TABLES `tbl_order` WRITE;
-
-insert  into `tbl_order`(`order_id`,`name`,`stock`,`price`,`orderdate`,`cashier`,`totalprice`) values (4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235);
-
-UNLOCK TABLES;
+insert  into `tbl_order`(`order_id`,`name`,`stock`,`price`,`orderdate`,`cashier`,`totalprice`) values (4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-14','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-14','Nyzuz Damaso',235),(4,'BBQ BACON SNACKER COMBO',8,239,'2023-07-20','Nyzuz Damaso',1912),(1,'Double Dasurv Meal',15,235,'2023-07-20','Nyzuz Damaso',3525),(4,'BBQ BACON SNACKER COMBO',1,239,'2023-07-21','Nyzuz Damaso',239),(1,'Double Dasurv Meal',1,235,'2023-07-21','Nyzuz Damaso',235);
 
 /*Table structure for table `tbl_pay` */
 
@@ -98,11 +100,7 @@ CREATE TABLE `tbl_pay` (
 
 /*Data for the table `tbl_pay` */
 
-LOCK TABLES `tbl_pay` WRITE;
-
-insert  into `tbl_pay`(`pay_id`,`img`,`name`,`stock`,`price`,`status`) values (2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',12,265,'notpaid');
-
-UNLOCK TABLES;
+insert  into `tbl_pay`(`pay_id`,`img`,`name`,`stock`,`price`,`status`) values (1,'kfc15.png','Double Dasurv Meal',1,185,'notpaid');
 
 /*Table structure for table `tbl_product` */
 
@@ -119,11 +117,7 @@ CREATE TABLE `tbl_product` (
 
 /*Data for the table `tbl_product` */
 
-LOCK TABLES `tbl_product` WRITE;
-
-insert  into `tbl_product`(`product_id`,`img`,`name`,`stock`,`price`) values (4,'kfc8.png','BBQ BACON SNACKER COMBO',17,189),(1,'kfc15.png','Double Dasurv Meal',13,185);
-
-UNLOCK TABLES;
+insert  into `tbl_product`(`product_id`,`img`,`name`,`stock`,`price`) values (4,'kfc8.png','BBQ BACON SNACKER COMBO',8,189),(1,'kfc15.png','Double Dasurv Meal',9,185),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',13,265);
 
 /*Table structure for table `tbl_purchase` */
 
@@ -135,15 +129,11 @@ CREATE TABLE `tbl_purchase` (
   `name` varchar(60) DEFAULT NULL,
   `price` int(30) DEFAULT NULL,
   PRIMARY KEY (`purchase_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_purchase` */
 
-LOCK TABLES `tbl_purchase` WRITE;
-
 insert  into `tbl_purchase`(`purchase_id`,`img`,`name`,`price`) values (1,'kfc15.png','Double Dasurv Meal',185),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',265),(3,'kfc3.png','ZINGER DOUBLE DOWN COMBO',265),(4,'kfc8.png','BBQ BACON SNACKER COMBO',189),(5,'kfc14.png','1-PC CHICKEN ALA CARTE',100),(6,'kfc13.png','2PC CHICKERN ALA CARTE',200),(7,'kfc5.png','CHEEZY ITALIAN ZINGER LOADED MEAL',265),(8,'kfc6.png','BUILD A FULLY LOADED MEAL',210),(9,'kfc12.png','BUCKET MEAL A',699);
-
-UNLOCK TABLES;
 
 /*Table structure for table `tbl_sale` */
 
@@ -159,11 +149,7 @@ CREATE TABLE `tbl_sale` (
 
 /*Data for the table `tbl_sale` */
 
-LOCK TABLES `tbl_sale` WRITE;
-
-insert  into `tbl_sale`(`sale_id`,`img`,`name`,`price`) values (4,'kfc8.png','BBQ BACON SNACKER COMBO',239),(1,'kfc15.png','Double Dasurv Meal',235);
-
-UNLOCK TABLES;
+insert  into `tbl_sale`(`sale_id`,`img`,`name`,`price`) values (4,'kfc8.png','BBQ BACON SNACKER COMBO',239),(1,'kfc15.png','Double Dasurv Meal',235),(2,'kfc2.png','ORIGINAL RECIPE DOUBLE DOWN COMBO',315);
 
 /*Table structure for table `tbl_user` */
 
@@ -176,15 +162,11 @@ CREATE TABLE `tbl_user` (
   `username` varchar(60) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_user` */
 
-LOCK TABLES `tbl_user` WRITE;
-
-insert  into `tbl_user`(`user_id`,`name`,`role`,`username`,`password`) values (1,'Nyzuz Damaso','admin','admin','admin'),(11,'hays','manager','manager','manager'),(3,'axel','cashier','cashier','cashier'),(8,'fvck','accountant','accountant','accountant'),(10,'ewan','manager','manager','manager');
-
-UNLOCK TABLES;
+insert  into `tbl_user`(`user_id`,`name`,`role`,`username`,`password`) values (1,'Nyzuz Damaso','admin','admin','admin  '),(11,'Robert','manager','manager','manager '),(3,'axel','cashier','cashier','cashier'),(8,'Jessica','accountant','accountant','accountant '),(15,'John Roa','hr','hr','hr');
 
 /* Trigger structure for table `tbl_buy` */
 

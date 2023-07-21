@@ -136,13 +136,18 @@
 
                 <?php if ($user['role'] === 'admin' || $user['role'] === 'hr'): ?>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="#"><i class="fa fa-user-tie"></i>HRM</a>
+                        <a class="sidebar-link" href="#"><i class="fa fa-user-tie"></i> HRM</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('employee'); ?>"><i class="fa fa-users"></i>
                                 Employees</a>
-                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i class="fa fa-coins"></i>
-                                Payroll</a>
                         </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin' || $user['role'] === 'manager'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('productsource'); ?>"><i
+                                class="fa fa-plus-square"></i> Productsource</a>
                     </li>
                 <?php endif; ?>
 
@@ -168,7 +173,7 @@
 
                 <?php if ($user['role'] === 'admin' || $user['role'] === 'accountant'): ?>
                     <li class="nav-item">
-                        <a class="sidebar-link" href="#"><i class="fas fa-money-check"></i>Accounting</a>
+                        <a class="sidebar-link" href="#"><i class="fas fa-money-check"></i> Accounting</a>
                         <ul class="sub-nav">
                             <a class="sidebar-link" href="<?php echo site_url('pay'); ?>"><i class="fas fa-money-bill"></i>
                                 Payment
@@ -177,6 +182,8 @@
                                 Buys</a>
                             <a class="sidebar-link" href="<?php echo site_url('order'); ?>"><i class="fa fa-cart-plus"></i>
                                 Orders</a>
+                            <a class="sidebar-link" href="<?php echo site_url('payroll'); ?>"><i class="fa fa-coins"></i>
+                                Payroll</a>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -192,6 +199,13 @@
                                     class="fa fa-chart-bar"></i> Data
                                 Analytics Expenses</a>
                         </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($user['role'] === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="sidebar-link" href="<?php echo site_url('auditlog'); ?>"><i class="fa fa-flag"></i>
+                            Auditlogs</a>
                     </li>
                 <?php endif; ?>
 
@@ -240,7 +254,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="http://192.168.10.65/FiveStarBusV2/">
+                        <a href="http://192.168.10.65/FiveStarBus/">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Five_Star_Bus_Co.%2C_Inc._logo_%26_eblem_2.png"
                                 style="width: 60px; height: auto; margin-left: 50px;">
                         </a>
@@ -321,7 +335,7 @@
                     </td>
                     <td>
                         <a href="http://192.168.10.151/nationalbookstore">
-                            <img src="http://192.168.10.151/nationalbookstore/public/assets/nbs.jpg"
+                            <img src="https://upload.wikimedia.org/wikipedia/en/c/c5/National_Book_Store_2016_logo.svg"
                                 style="width: 60px; height: auto; margin-left: 50px;">
                         </a>
                     </td>
