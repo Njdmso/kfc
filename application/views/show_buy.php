@@ -256,7 +256,7 @@
                 <?php foreach ($buys as $buy): ?>
                     <tr>
                         <td>
-                            <?php echo $buy['buy_id']; ?>
+                            <?php echo $buy['buys_id']; ?>
                         </td>
                         <td>
                             <div>
